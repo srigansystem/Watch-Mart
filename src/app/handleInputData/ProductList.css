@@ -1,0 +1,51 @@
+
+#EditPageText{
+    color: black;
+}
+#EditPageHeading{
+    margin-top: 20px;
+    color: black;
+    
+}
+#container{
+    background-color: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+}
+#image{
+    height: 40px;
+    width: 40px;
+    
+}
+#items{
+    
+    display: flex;
+}
+#Addbtn{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    float: right;
+    border-radius: 50% ;
+}
+#edit{
+    background-color: rgb(0, 0, 255);
+}
+#editicon{
+    background-color: rgb(0, 0, 255);
+}
+#productHead{
+    background-color: antiquewhite;
+}
