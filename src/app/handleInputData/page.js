@@ -39,7 +39,7 @@ const HandlingFiles = () => {
 <div>
         <div className="card px-8 py-6 rounded-lg bg-gray-800 w-72" id='input'>
             <h1 className="text-center font-bold text-3xl text-white">Edit Data</h1>
-            <form className="my-6">
+            <div className="my-6">
                 <div id='label'><label>Id</label><input className="p-2 my-2 rounded w-[100%] focus:outline-blue-600" placeholder="Product Number" type="text" value={id||''} onChange={(e)=>setId(e.target.value)} style={{color:'black'}} disabled={true}></input></div>
                 <div id='label'><label>Name</label><input className="p-2 my-2 rounded w-[100%] focus:outline-blue-600" placeholder="Name" type="text" value={name||''} onChange={(e)=>setName(e.target.value)} style={{color:'black'}}></input></div>
                 <div id='label'><label>Price</label><input className="p-2 my-2 rounded w-[100%] focus:outline-blue-600" placeholder="Price" type="text"  value={price||''} onChange={(e)=>setPrice(e.target.value)} style={{color:'black'}}></input></div>
@@ -48,7 +48,7 @@ const HandlingFiles = () => {
                 <div id='label'><label>Number of Stocks</label><input className="p-2 my-2 rounded w-[100%] focus:outline-blue-600" placeholder="Stock" type="text"  value={stock||''} onChange={(e)=>setStock(e.target.value)} style={{color:'black'}}></input></div>
                 <button className="bg-blue-600 hover:bg-blue-500 text-white font-semibold p-2 mt-3 rounded w-[100%]" onClick={()=>editbtnfunction()} id='updatebtn'>Update</button>
                 <button className="bg-blue-600 hover:bg-blue-500 text-white font-semibold p-2 mt-3 rounded w-[100%]" onClick={()=>cancel()} id='cancelbtn'>Cancel</button>
-            </form>
+            </div>
         </div>
     </div>
 
