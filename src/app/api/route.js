@@ -52,10 +52,10 @@ export async function PUT(req,res){
 
   try {
     const data=await req.json();
-    console.log(data);
+    //console.log(data);
     //const fileContents =datasheet
     //console.log(fileContents);
-    let jsondata=JSON.parse(datasheet)
+    let jsondata=datasheet
     //console.log(fulldata[0].id);
     jsondata.forEach(dict => {
     //console.log("sk",dict.id,data.id);
