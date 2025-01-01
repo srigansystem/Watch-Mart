@@ -36,6 +36,7 @@ const HandlingFiles = () => {
   left: '50%',
   transform: 'translate(-50%, -50%)',
 }}  >
+  {/* React code for editbtn input feild */}
 <div>
         <div className="card px-8 py-6 rounded-lg bg-gray-800 w-72" id='input'>
             <h1 className="text-center font-bold text-3xl text-white">Edit Data</h1>

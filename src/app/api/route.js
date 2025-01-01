@@ -3,12 +3,6 @@
 export async function GET(req,res){
   try {
     const fileContents =await readDatafile();
-
-    // Parse the file contents to JSON
-    //const data =await JSON.parse(fileContents);
-    // Return a successful response with the data
-    //console.log(data);
-    
     return new Response(JSON.stringify({ fileContents }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
@@ -36,10 +30,6 @@ export async function POST(req){
     }
 
     try {
-      // const filePath = "D:/WatchMarket/sellingplatform/src/app/database/DB.json";  // Define file path
-
-      // // Write data to the file (Uncomment below if needed)
-      // fs.writeFileSync(filePath, JSON.stringify(file, null, 2), 'utf-8');
       datasheet=file;
       // Return success response
       return new Response(JSON.stringify({ message: 'File written successfully' }));
@@ -52,9 +42,6 @@ export async function PUT(req,res){
 
   try {
     const data=await req.json();
-    //console.log(data);
-    //const fileContents =datasheet
-    //console.log(fileContents);
     let jsondata=datasheet
     //console.log(fulldata[0].id);
     jsondata.forEach(dict => {
@@ -68,11 +55,6 @@ export async function PUT(req,res){
       console.log(dict);
     }
     });
-      // const filePath = "D:/WatchMarket/sellingplatform/src/app/database/DB.json";  // Define file path
-
-      // // Write data to the file (Uncomment below if needed)
-      // fs.writeFileSync(filePath, JSON.stringify(jsondata, null, 2), 'utf-8');
-      // // Return success response
       datasheet=jsondata
       return new Response(JSON.stringify({ message: 'File written successfully' }));
     } catch (error) {
@@ -80,14 +62,13 @@ export async function PUT(req,res){
       return new Response(JSON.stringify({ error: 'Failed to update file' }));
     }
   }
+//user defined function for read the file
 export async function readDatafile(){
 
   const response=datasheet;
-  //const response=fs.createReadStream(file);
-  //console.log(response);
-  
   return response;
 }
+//dataset
 export var datasheet=[
   {
     "id": 1,
