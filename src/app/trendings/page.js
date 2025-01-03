@@ -22,7 +22,7 @@ export default function Page(){
         <Footer />
         </>
       )
-    }
+    }x
     {/* <Footer/> */}
     </>
   );

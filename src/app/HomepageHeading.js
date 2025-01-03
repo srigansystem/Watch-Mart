@@ -5,15 +5,20 @@ import DataContext from './context/dataContext';
 import "./page.css"
 import EditBtn from './EditBtn';
 import Link from 'next/link';
+import logo from "./images/HeroImage.jpg"
 const HomepageHeading = () => {
   const {addtocard,setAddtocard}=useContext(DataContext)
   return (
     <>
+    
     <nav className="bg-[#2874f0] text-white py-2.5 fixed w-full top-0 z-50" id='header'>
     <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
       <div className="flex h-16 items-center justify-between">
         <div className="flex-1 md:flex md:items-center md:gap-12">
+        
+
           <strong style={{fontSize:"40px"}}>Ewari Times</strong>
+          
         </div>
   
         <div className="md:flex md:items-center md:gap-12">

@@ -1,11 +1,11 @@
 "use client"
 import React, { useContext, useState } from 'react'
-import "./HandlingInputData.css"
+import "./AppInputData.css"
 import DataContext from '../context/dataContext';
 
 // Function to process the file in the backend-like logic
 
-const HandlingInputData = () => {
+const AppInputData = () => {
   const [inputfile,setInputFile] = useState('')
   const {extractinginputfile,loading,setAddbtnclicked,setLoading}=useContext(DataContext)
   const reachingServer=async (file)=>{
@@ -34,4 +34,4 @@ const HandlingInputData = () => {
   );
 }
 
-export default HandlingInputData;
+export default AppInputData;

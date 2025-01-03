@@ -1,7 +1,7 @@
 "use client"
 import React, { useContext } from 'react';
-import HandlingInputData from "./HandlingInputData.js"
-import "./HandlingInputData.css";
+import AddInputData from "./AddInputData.js"
+import "./AppInputData.css";
 import Loading from "../loading.js";
 import ProductList from './ProductList.js';
 import DataContext from '../context/dataContext.js';
@@ -68,7 +68,7 @@ const HandlingFiles = () => {
           left: '50%',
           transform: 'translate(-50%, -50%)',
         }}  >
-        <HandlingInputData/>
+        <AddInputData/>
 
       </div>
     </div>)}
