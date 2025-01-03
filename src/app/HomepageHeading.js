@@ -5,27 +5,29 @@ import DataContext from './context/dataContext';
 import "./page.css"
 import EditBtn from './EditBtn';
 import Link from 'next/link';
-import logo from "./images/HeroImage.jpg"
 const HomepageHeading = () => {
   const {addtocard,setAddtocard}=useContext(DataContext)
   return (
     <>
-    
     <nav className="bg-[#2874f0] text-white py-2.5 fixed w-full top-0 z-50" id='header'>
     <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
       <div className="flex h-16 items-center justify-between">
         <div className="flex-1 md:flex md:items-center md:gap-12">
-          <strong style={{fontSize:"40px"}}>Ewari Times</strong>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-9">
+          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clipRule="evenodd" />
+          </svg>
+
+          <strong style={{fontSize:"40px",margin:-50}}>Ewari Times</strong>
         </div>
   
         <div className="md:flex md:items-center md:gap-12">
           <nav aria-label="Global" className="hidden md:block">
             <ul className="flex items-center gap-6 text-sm">
             <li>
-                <a className="text-gray-500 transition hover:text-gray-500/75" href="#" style={{color:"#FFFFFB"}}> About Us </a>
+                <a className="text-gray-500 transition hover:text-gray-500/75" href="#" style={{color:"#FFFFFB"}}> Home </a>
               </li>
               <li>
-                <a className="text-gray-500 transition hover:text-gray-500/75" href="#" style={{color:"#FFFFFB"}}> Contact Us </a>
+                <a className="text-gray-500 transition hover:text-gray-500/75" href="#" style={{color:"#FFFFFB"}}> Contact us </a>
               </li>
   
               
