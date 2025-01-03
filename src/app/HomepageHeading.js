@@ -23,7 +23,7 @@ const HomepageHeading = () => {
                 <a className="text-gray-500 transition hover:text-gray-500/75" href="#" style={{color:"#FFFFFB"}}> About Us </a>
               </li>
               <li>
-                <a className="text-gray-500 transition hover:text-gray-500/75" href="#" style={{color:"#FFFFFB"}}> Contact us </a>
+                <a className="text-gray-500 transition hover:text-gray-500/75" href="#" style={{color:"#FFFFFB"}}> Contact Us </a>
               </li>
   
               
