@@ -6,6 +6,7 @@ import HomepageHeading from "./HomepageHeading";
 import MenuBook from "./MenuBook";
 import Loading from "./loading";
 import Footer from "./trendings/footer";
+import ImageSlider from "./ImageSlider";
 
 export default function Home() {
   const {loading}=useContext(DataContext);
@@ -14,8 +15,9 @@ export default function Home() {
     <>
     <HomepageHeading />{
       loading?(<Loading/>):(
-      <>
-      <HomepageAbout />
+    <>
+      <ImageSlider/>
+
       <MenuBook />
       <Footer/></>
       )

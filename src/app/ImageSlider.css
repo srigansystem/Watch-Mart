@@ -1,0 +1,28 @@
+/* Styles for the banner container */
+.banner-container {
+    width: 100%;
+        overflow: hidden;
+            position: relative;
+                margin: 0 auto;
+                }
+
+                /* Styles for the image slider */
+                .image-slider {
+                    display: flex;
+                        transition: transform 0.5s ease-in-out;
+                        }
+
+                        /* Styles for each image */
+                        .image-slider img {
+                            width: 100%;
+                                height: auto;
+                                    object-fit: cover;
+                                    }
+
+                                    /* Make sure the images are responsive */
+                                    @media (max-width: 768px) {
+                                        .image-slider img {
+                                                width: 80%; /* Adjust width for mobile devices */
+                                                    }
+                                                    }
+                                                    
