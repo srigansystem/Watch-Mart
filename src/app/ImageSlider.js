@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import slider from "./images/logo.jpeg"
-import slider2 from "./images/HeroImage.jpg"
-import slider3 from "./images/sampleImg.jpeg"
+import slider from "./images/International.jpg"
+import slider2 from "./images/BestSellers.jpg"
+import slider3 from "./images/NewArrivals.jpg"
+import slider4 from "./images/Smart.jpg"
+import slider5 from "./images/WoMen.jpg"
 import "./ImageSlider.css"
 
 const ImageSlider=() =>{
@@ -12,6 +14,8 @@ const ImageSlider=() =>{
                 slider,
                 slider2,
                 slider3,
+                slider4,
+                slider5,
                                                     ];
         useEffect(() => {
           let interval;
