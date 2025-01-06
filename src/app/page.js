@@ -6,7 +6,12 @@ import HomepageHeading from "./HomepageHeading";
 import MenuBook from "./MenuBook";
 import Loading from "./loading";
 import Footer from "./trendings/footer";
+import Categories from "./Categories";
 import ImageSlider from "./ImageSlider";
+import Login from "./login/Login";
+import Register from "./Register";
+import MyAccount from "./MyAccount";
+import WatchesByBrand from "./WatchesByBrand";
 
 export default function Home() {
   const {loading}=useContext(DataContext);
@@ -16,7 +21,12 @@ export default function Home() {
     <HomepageHeading />{
       loading?(<Loading/>):(
     <>
+      <Categories/>
       <ImageSlider/>
+      <Login/>
+      <Register/>
+      <MyAccount/>
+      <WatchesByBrand/>
 
       <MenuBook />
       <Footer/></>

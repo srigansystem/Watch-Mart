@@ -1,3 +1,4 @@
+import react from "react";
 import { useState, useEffect } from "react";
 import './Categories.css'; // Import the CSS file
 
@@ -7,7 +8,7 @@ const Categories = () => {
     'Smart Watches',
     'Sports Watches',
     'Kids Collection',
-    'More',
+    'More...',
   ];
 
   return (
