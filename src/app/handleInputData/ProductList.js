@@ -1,107 +1,277 @@
-"use client"
-import React, { useContext } from 'react'
-import "./ProductList.css"
-import DataContext from '../context/dataContext';
+"use client";
+import React, { useContext, useState } from "react";
+import "./ProductList.css";
+import DataContext from "../context/dataContext";
+
 const ProductList = () => {
-    const {dataset,setAddbtnclicked,setEditbtnclicked,setName,setImage,setPrice,setDetails,setId,setLoading,setStock}=useContext(DataContext);
-    //console.log(dataset); 
-    const addbtn=()=>{
-      setAddbtnclicked(true);
-    }
-    const editbtn=(id,name,image,price,details,stock)=>{
-      //console.log(id,name,image,price,details);
-      setEditbtnclicked(true);
-      setId(id);
-      setName(name);
-      setImage(image);
-      setPrice(price);
-      setDetails(details);
-      setStock(stock);
+  const {
+    dataset,
+    setDataSet,
+    setAddbtnclicked,
+    setEditbtnclicked,
+    setName,
+    setImage,
+    setPrice,
+    setDetails,
+    setId,
+    setLoading,
+    setStock,
+    setCategory,
+  } = useContext(DataContext);
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("");
+  const [filterStock, setFilterStock] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
+  const itemsPerPage = 10;
+  const [discountValues, setDiscountValues] = useState({});
+  const [discountType, setDiscountType] = useState("percentage");
+  const [bulkDiscountValue, setBulkDiscountValue] = useState(""); // Bulk discount input field value
+
+  const handleSearch = (e) => setSearchQuery(e.target.value.toLowerCase());
+  const handleSort = (e) => setSortBy(e.target.value);
+  const handleFilterStock = (e) => setFilterStock(e.target.value);
+
+  const openDeleteModal = (product) => {
+    setProductToDelete(product);
+    setDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setProductToDelete(null);
+  };
+
+  const deleteProduct = async () => {
+    const updatedDataset = dataset.filter((product) => product.id !== productToDelete.id);
+    console.log("ieryrgcbkeudcgryk3irycg",updatedDataset);
+    
+    setDataSet(updatedDataset);
+    closeDeleteModal();
+  };
+
+  const handleDiscountChange = (productId, e) => {
+    const value = e.target.value;
+    setDiscountValues((prevState) => ({
+      ...prevState,
+      [productId]: value,
+    }));
+  };
+
+  const handleBulkDiscountChange = (e) => setBulkDiscountValue(e.target.value); // Update bulk discount value
+
+  const handleDiscountTypeChange = (e) => setDiscountType(e.target.value);
+
+  const calculateDiscountedPrice = (price, discount, discountType) => {
+    if (discountType === "percentage") {
+      return price - (price * discount) / 100;
     }
+    return price - discount;
+  };
+
+  const applyDiscount = (product) => {
+    const discountValue = discountValues[product.id] || 0;
+    return calculateDiscountedPrice(product.price, discountValue, discountType);
+  };
+
+  const displayDiscount = (product) => {
+    const discountValue = discountValues[product.id] || 0;
+    return discountType === "percentage"
+      ? `${discountValue}% off`
+      : `₹. ${discountValue} off`;
+  };
+
+  const applyBulkDiscount = () => {
+    if (bulkDiscountValue) {
+      const parsedDiscount = parseFloat(bulkDiscountValue);
+      if (!isNaN(parsedDiscount)) {
+        const updatedDiscountValues = dataset.reduce((acc, product) => {
+          acc[product.id] = parsedDiscount;
+          return acc;
+        }, {});
+        setDiscountValues(updatedDiscountValues);
+      }
+    }
+  };
+
+  const filteredProducts = dataset
+    .filter((product) => product.name.toLowerCase().includes(searchQuery))
+    .filter((product) => {
+      if (filterStock === "inStock") return product.stock > 0;
+      if (filterStock === "outOfStock") return product.stock === 0;
+      return true;
+    })
+    .sort((a, b) => {
+      if (sortBy === "name") return a.name.localeCompare(b.name);
+      if (sortBy === "price") return a.price - b.price;
+      if (sortBy === "stock") return b.stock - a.stock;
+      return 0;
+    });
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const addbtn = () => setAddbtnclicked(true);
+
+  const editbtn = (id, name, image, price, details, stock, discount, category) => {
+    setEditbtnclicked(true);
+    setId(id);
+    setName(name);
+    setImage(image);
+    setPrice(price);
+    setDetails(details);
+    setStock(stock);
+    console.log("test",discountValues);
+    
+    setDiscountValues(discountValues);
+    // setCategory(category);
+  };
+
   return (
-    <>
-    <span className="relative flex justify-center">
-  <div
-    className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75"
-  ></div>
+    <div className="product-admin">
+      <h1 className="page-heading">Product Management</h1>
 
-  <span className="relative z-10 bg-white px-6" id='EditPageHeading'>Products</span>
-</span>
-    <div id='container'>
-      <div className='list' id='productHead'>
-        <div id='items'>
-          <h3 id='EditPageText'>Name</h3>
-        </div>
-        <div id='items'>
-          <h3 id='EditPageText'>Number of Stocks</h3>
-        </div>
-        <div id='items'>
-          <h3 id='EditPageText'>Edit</h3>
-        </div>
-        </div>
-      {dataset.map((data,index)=>(
-        <div className='list' key={index}>
-        <div id='items'>
-          <img src={data.image} id='image'></img>
-          <h3 id='EditPageText'>{data.name}</h3>
-        </div>
-        <div id='items'>
-          <h3 id='EditPageText'>{data.stock}</h3>
-        </div>
-        <div id='items'>
-        <button
-  className="rounded-lg relative w-36 h-10 cursor-pointer flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
-id='edit' onClick={()=>editbtn(data.id,data.name,data.image,data.price,data.details,data.stock)}>
-  <span
-    className="text-gray-200 font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300"
-    >Edit</span
-  >
-  <span
-    className="absolute right-0 h-full w-10 rounded-lg bg-green-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
-  id='editicon'>
-    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30" color='white'>
-    <path d="M 22.828125 3 C 22.316375 3 21.804562 3.1954375 21.414062 3.5859375 L 19 6 L 24 11 L 26.414062 8.5859375 C 27.195062 7.8049375 27.195062 6.5388125 26.414062 5.7578125 L 24.242188 3.5859375 C 23.851688 3.1954375 23.339875 3 22.828125 3 z M 17 8 L 5.2597656 19.740234 C 5.2597656 19.740234 6.1775313 19.658 6.5195312 20 C 6.8615312 20.342 6.58 22.58 7 23 C 7.42 23.42 9.6438906 23.124359 9.9628906 23.443359 C 10.281891 23.762359 10.259766 24.740234 10.259766 24.740234 L 22 13 L 17 8 z M 4 23 L 3.0566406 25.671875 A 1 1 0 0 0 3 26 A 1 1 0 0 0 4 27 A 1 1 0 0 0 4.328125 26.943359 A 1 1 0 0 0 4.3378906 26.939453 L 4.3632812 26.931641 A 1 1 0 0 0 4.3691406 26.927734 L 7 26 L 5.5 24.5 L 4 23 z"></path>
-</svg>
-  </span>
-</button>        </div>
-        
+      <div className="controls">
+        <input
+          type="text"
+          placeholder="Search products..."
+          onChange={handleSearch}
+        />
+        <select className="sort-dropdown" value={sortBy} onChange={handleSort}>
+          <option value="">Sort By</option>
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+          <option value="stock">Stock</option>
+        </select>
+        <select
+          className="filter-dropdown"
+          value={filterStock}
+          onChange={handleFilterStock}
+        >
+          <option value="all">All Products</option>
+          <option value="inStock">In Stock</option>
+          <option value="outOfStock">Out of Stock</option>
+        </select>
       </div>
-      
-      ))} 
-      <div id='Addbtn'>
-      <button onClick={()=>addbtn()}
-  className="rounded-lg relative w-36 h-10 cursor-pointer flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
->
-  <span
-    className="text-gray-200 font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300"
-    >Add</span
-  >
-  <span
-    className="absolute right-0 h-full w-10 rounded-lg bg-green-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
-  >
-    <svg
-      className="svg w-8 text-white"
-      fill="none"
-      height="24"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      width="24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <line x1="12" x2="12" y1="5" y2="19"></line>
-      <line x1="5" x2="19" y1="12" y2="12"></line>
-    </svg>
-  </span>
-</button>
 
-      </div>
-      </div>
-    </>
-  )
-}
+      <div className="discount-controls">
+        <select
+          className="discount-type-dropdown"
+          value={discountType}
+          onChange={handleDiscountTypeChange}
+        >
+          <option value="percentage">Percentage</option>
+          <option value="amount">Amount</option>
+        </select>
 
-export default ProductList
+        <div className="bulk-discount">
+          <input
+            type="number"
+            value={bulkDiscountValue}
+            onChange={handleBulkDiscountChange}
+            placeholder="Enter Bulk Discount"
+          />
+          <button className="btn apply-bulk-discount" onClick={applyBulkDiscount}>
+            Apply Bulk Discount
+          </button>
+        </div>
+      </div>
+
+      <div id="product-list">
+        {paginatedProducts.map((product) => (
+          <div className="product-card" key={product.id}>
+            <img
+              src={product.image}
+              alt={product.name}
+              className="product-image"
+            />
+            <div className="product-details">
+              <h3 className="product-name">{product.name}</h3>
+              <p className="product-price">
+                {discountValues[product.id] > 0 ? (
+                  <>
+                    <span className="product-price discounted">
+                      ₹. {product.price}
+                    </span>
+                    ₹. {applyDiscount(product).toFixed(2)}
+                  </>
+                ) : (
+                  `₹. ${product.price}`
+                )}
+              </p>
+              <p className={`product-stock ${product.stock > 0 ? "in-stock" : "out-of-stock"}`}>
+                {product.stock > 0 ? "In Stock" : "Out of Stock"}
+              </p>
+              <p className="product-category">Category: {product.category}</p>
+              <p className="product-discount">{displayDiscount(product)}</p>
+            </div>
+            <div className="product-actions">
+              <button
+                className="btn edit"
+                onClick={() =>
+                  editbtn(
+                    product.id,
+                    product.name,
+                    product.image,
+                    product.price,
+                    product.details,
+                    product.stock,
+                    product.discount,
+                    product.category
+                  )
+                }
+              >
+                Edit
+              </button>
+              <button className="btn delete" onClick={() => openDeleteModal(product)}>
+                Delete
+              </button>
+            </div>
+
+            <div className="discount-input">
+              <input
+                type="number"
+                value={discountValues[product.id] || ""}
+                onChange={(e) => handleDiscountChange(product.id, e)}
+                placeholder={`Set discount (${discountType === 'percentage' ? '%' : '₹'})`}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {isDeleteModalOpen && (
+        <div className="delete-modal">
+          <div className="modal-content">
+            <h2>Are you sure you want to delete this product?</h2>
+            <button onClick={deleteProduct} className="btn delete">Yes, Delete</button>
+            <button onClick={closeDeleteModal} className="btn cancel">Cancel</button>
+          </div>
+        </div>
+      )}
+
+      <div className="pagination">
+        {[...Array(totalPages).keys()].map((num) => (
+          <button
+            key={num}
+            className={`page-btn ${currentPage === num + 1 ? "active" : ""}`}
+            onClick={() => setCurrentPage(num + 1)}
+          >
+            {num + 1}
+          </button>
+        ))}
+      </div>
+
+      <button className="add-btn" onClick={addbtn}>
+        Add Product
+      </button>
+    </div>
+  );
+};
+
+export default ProductList;

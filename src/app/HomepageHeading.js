@@ -33,12 +33,11 @@ const HomepageHeading = () => {
               
             </ul>
           </nav>
-  
           <div className="flex items-center gap-4">
             <div className="sm:flex sm:gap-4">
               <a
                 className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                href="#" style={{backgroundColor:"#FFC145"}}
+                href="/login" style={{backgroundColor:"#FFC145"}}
               >
                 <h3 style={{color:"black"}}>Login</h3>
               </a>
@@ -46,12 +45,20 @@ const HomepageHeading = () => {
               <div className="hidden sm:flex">
                 <a
                   className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-                  href="#"  style={{backgroundColor:"#FFFFFB"}}
+                  href="register"  style={{backgroundColor:"#FFFFFB"}}
                 >
                   <h3  style={{color:"black"}}>Register</h3>
                 </a>
-              </div>  
+                
+              </div> 
+               
             </div>
+            <a href='/Administrator'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+            </svg>
+            </a>
+
           </div>
           <div className="relative">
               <ShoppingCart size={24}  style={{color:"white"}} />

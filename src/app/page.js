@@ -8,8 +8,6 @@ import Loading from "./loading";
 import Footer from "./trendings/footer";
 import Categories from "./Categories";
 import ImageSlider from "./ImageSlider";
-import Login from "./login/Login";
-import Register from "./Register";
 import MyAccount from "./MyAccount";
 import WatchesByBrand from "./WatchesByBrand";
 
@@ -23,8 +21,6 @@ export default function Home() {
     <>
       <Categories/>
       <ImageSlider/>
-      <Login/>
-      <Register/>
       <MyAccount/>
       <WatchesByBrand/>
 

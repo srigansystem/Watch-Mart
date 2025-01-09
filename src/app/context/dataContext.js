@@ -116,6 +116,7 @@ export const DataProvider = ({ children }) => {
             loading,
             setLoading,
             error,
+            setDataSet,
             extractinginputfile,
             json,loading,addbtnclicked,
             setAddbtnclicked,

@@ -1,0 +1,14 @@
+.sidebar {
+    font-family: "Arial", sans-serif;
+  }
+  
+  .sidebar ul {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar ul li {
+    font-size: 1.1rem;
+    margin: 10px 0;
+  }
+  

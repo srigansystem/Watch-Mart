@@ -74,7 +74,7 @@ export var datasheet=[
     "id": 1,
     "name": "Rolex Submariner",
     "details": "Stainless Steel, Automatic Movement",
-    "price": "1,00,000",
+    "price": 100000,
     "image": "https://watchingelegance.com/wp-content/uploads/2019/10/Rolex-Submariner-Date-40mm-116618LN.png",
     "stock": "11"
   },
