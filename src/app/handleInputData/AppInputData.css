@@ -1,6 +1,7 @@
 #input{
     margin-top: 500px;
-    width:500px;  
+    color: white;
+    width: 500px;
 }
 #updatebtn{
     background-color: green;
@@ -14,4 +15,8 @@
     float: none;
     justify-content: space-between;
 
+}
+#import{
+    color: white;
+    width: 300px;
 }

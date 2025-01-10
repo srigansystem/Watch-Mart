@@ -3,8 +3,12 @@ import React, { useContext, useState } from "react";
 import "./ProductList.css";
 import DataContext from "../context/dataContext";
 
+
+
 const ProductList = () => {
   const {
+    extractinginputfile,
+    setDiscountValues,
     dataset,
     setDataSet,
     setAddbtnclicked,
@@ -16,7 +20,11 @@ const ProductList = () => {
     setId,
     setLoading,
     setStock,
-    setCategory,
+    discountType,
+    setDiscountType,
+    setOffer,
+    addbtnclicked,
+    editbtnclicked
   } = useContext(DataContext);
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,8 +34,7 @@ const ProductList = () => {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
   const itemsPerPage = 10;
-  const [discountValues, setDiscountValues] = useState({});
-  const [discountType, setDiscountType] = useState("percentage");
+  
   const [bulkDiscountValue, setBulkDiscountValue] = useState(""); // Bulk discount input field value
 
   const handleSearch = (e) => setSearchQuery(e.target.value.toLowerCase());
@@ -52,15 +59,15 @@ const ProductList = () => {
     closeDeleteModal();
   };
 
-  const handleDiscountChange = (productId, e) => {
-    const value = e.target.value;
-    setDiscountValues((prevState) => ({
-      ...prevState,
-      [productId]: value,
-    }));
-  };
+  // const handleDiscountChange = (productId, e) => {
+  //   const value = e.target.value;
+  //   setDiscountValues((prevState) => ({
+  //     ...prevState,
+  //     [productId]: value,
+  //   }));
+  // };
 
-  const handleBulkDiscountChange = (e) => setBulkDiscountValue(e.target.value); // Update bulk discount value
+
 
   const handleDiscountTypeChange = (e) => setDiscountType(e.target.value);
 
@@ -72,35 +79,39 @@ const ProductList = () => {
   };
 
   const applyDiscount = (product) => {
-    const discountValue = discountValues[product.id] || 0;
+    const discountValue = bulkDiscountValue || 0;
     return calculateDiscountedPrice(product.price, discountValue, discountType);
   };
 
-  const displayDiscount = (product) => {
-    const discountValue = discountValues[product.id] || 0;
+  const displayDiscount = () => {
+    const discountValue = bulkDiscountValue || 0;
     return discountType === "percentage"
       ? `${discountValue}% off`
       : `₹. ${discountValue} off`;
   };
 
+
   const applyBulkDiscount = () => {
     if (bulkDiscountValue) {
       const parsedDiscount = parseFloat(bulkDiscountValue);
-      if (!isNaN(parsedDiscount)) {
-        const updatedDiscountValues = dataset.reduce((acc, product) => {
-          acc[product.id] = parsedDiscount;
-          return acc;
-        }, {});
-        setDiscountValues(updatedDiscountValues);
+      
+        setDiscountValues(parsedDiscount);
+        console.log("sk",bulkDiscountValue);
+        
+        dataset.map((product)=>{
+          if(product.category=="Analog"){
+            product["offer"]=displayDiscount(),product["currentprice"]=applyDiscount(product)
+        }});
+        extractinginputfile(dataset,false)
+         
       }
-    }
   };
 
   const filteredProducts = dataset
     .filter((product) => product.name.toLowerCase().includes(searchQuery))
     .filter((product) => {
       if (filterStock === "inStock") return product.stock > 0;
-      if (filterStock === "outOfStock") return product.stock === 0;
+      if (filterStock === "OutOfStock") return product.stock == 0;
       return true;
     })
     .sort((a, b) => {
@@ -118,7 +129,7 @@ const ProductList = () => {
 
   const addbtn = () => setAddbtnclicked(true);
 
-  const editbtn = (id, name, image, price, details, stock, discount, category) => {
+  const editbtn = (id, name, image, price, details, stock, offer,currentprice) => {
     setEditbtnclicked(true);
     setId(id);
     setName(name);
@@ -126,19 +137,29 @@ const ProductList = () => {
     setPrice(price);
     setDetails(details);
     setStock(stock);
-    console.log("test",discountValues);
+    setOffer(offer);
     
-    setDiscountValues(discountValues);
-    // setCategory(category);
-  };
+  //   console.log("test",discountValues);
+  //   const applyDiscount = (product) => {
+  //     const discountValue = product.offer || 0;
+  //     return calculateDiscountedPrice(product.price, discountValue, discountType);
+  //   };
+  
+
+  //   setDiscountValues(discountValues);
+  //   // setCategory(category);
+  console.log();
+  
+};
 
   return (
-    <div className="product-admin">
+    <div className="product-admin" style={{filter: `blur(${addbtnclicked || editbtnclicked? "0.5px" : "0px"})`,
+    transition: "filter 0.3s ease",}}>
       <h1 className="page-heading">Product Management</h1>
 
       <div className="controls">
         <input
-          type="text"
+          type="text" className="search-box"
           placeholder="Search products..."
           onChange={handleSearch}
         />
@@ -155,7 +176,7 @@ const ProductList = () => {
         >
           <option value="all">All Products</option>
           <option value="inStock">In Stock</option>
-          <option value="outOfStock">Out of Stock</option>
+          <option value="OutOfStock">Out of Stock</option>
         </select>
       </div>
 
@@ -173,7 +194,7 @@ const ProductList = () => {
           <input
             type="number"
             value={bulkDiscountValue}
-            onChange={handleBulkDiscountChange}
+            onChange={(e)=>setBulkDiscountValue(e.target.value)}
             placeholder="Enter Bulk Discount"
           />
           <button className="btn apply-bulk-discount" onClick={applyBulkDiscount}>
@@ -193,12 +214,12 @@ const ProductList = () => {
             <div className="product-details">
               <h3 className="product-name">{product.name}</h3>
               <p className="product-price">
-                {discountValues[product.id] > 0 ? (
+                {product.currentprice > 0 ? (
                   <>
                     <span className="product-price discounted">
                       ₹. {product.price}
                     </span>
-                    ₹. {applyDiscount(product).toFixed(2)}
+                    ₹. {product.currentprice}
                   </>
                 ) : (
                   `₹. ${product.price}`
@@ -207,8 +228,12 @@ const ProductList = () => {
               <p className={`product-stock ${product.stock > 0 ? "in-stock" : "out-of-stock"}`}>
                 {product.stock > 0 ? "In Stock" : "Out of Stock"}
               </p>
-              <p className="product-category">Category: {product.category}</p>
-              <p className="product-discount">{displayDiscount(product)}</p>
+              {/* <p className="product-category">Category: {product.category}</p> */}
+              {product.currentprice < product.price ? (
+        <p className="product-discount">{product.offer}</p>):(<p style={{marginTop:"40px"}}></p>)
+      }
+
+              
             </div>
             <div className="product-actions">
               <button
@@ -221,8 +246,8 @@ const ProductList = () => {
                     product.price,
                     product.details,
                     product.stock,
-                    product.discount,
-                    product.category
+                    product.offer,
+                    product.currentprice
                   )
                 }
               >
@@ -233,14 +258,7 @@ const ProductList = () => {
               </button>
             </div>
 
-            <div className="discount-input">
-              <input
-                type="number"
-                value={discountValues[product.id] || ""}
-                onChange={(e) => handleDiscountChange(product.id, e)}
-                placeholder={`Set discount (${discountType === 'percentage' ? '%' : '₹'})`}
-              />
-            </div>
+            
           </div>
         ))}
       </div>
@@ -266,10 +284,10 @@ const ProductList = () => {
           </button>
         ))}
       </div>
-
-      <button className="add-btn" onClick={addbtn}>
-        Add Product
-      </button>
+          <button className="add-btn" onClick={addbtn}>
+            Add Product
+          </button>
+      
     </div>
   );
 };

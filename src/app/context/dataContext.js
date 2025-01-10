@@ -17,8 +17,11 @@ export const DataProvider = ({ children }) => {
     const [price,setPrice]=useState('');
     const [details,setDetails]=useState('');
     const [stock,setStock]=useState('');
+    const [offer,setOffer]=useState('');
     const [addtocard,setAddtocard]=useState(0);
     const [filteredData,setFilteredData]=useState([]);
+    const [discountValues, setDiscountValues] = useState({});
+    const [discountType, setDiscountType] = useState("percentage");
     //getting data throw api
     useEffect(() => {
         async function fetchData() {
@@ -78,23 +81,35 @@ export const DataProvider = ({ children }) => {
     
     }
     //End user defined func
-    const extractinginputfile=async (file)=>{
-        console.log(file);
-        await filereader(file)
-        
-        console.log(json);
-        
-        const response = await fetch(`/api`,
+    const extractinginputfile=async (file,isFile=true)=>{
+        //console.log(file);
+        if(isFile){
+            await filereader(file)
+            const response = await fetch(`/api`,
+                {
+                    
+                    method: 'POST',
+                    body:JSON.stringify(json),
+                }
+            )
+        }
+        else{
+           const response = await fetch(`/api`,
             {
                 
                 method: 'POST',
-                body:JSON.stringify(json),
+                body:JSON.stringify(file),
             }
         )
+        }
+
+        
+        
         
         };
-        const updatefunction=async(id,name,price,image,details,stock)=>{
-            const data={'id':id,'name':name,'price':price,'image':image,'details':details,'stock':stock}
+        const updatefunction=async(id,name,price,image,details,stock,currentprice,offer,isSingleUpdate=true)=>{
+
+            const data={'id':id,'name':name,'price':price,'image':image,'details':details,'stock':stock,'currentprice':currentprice,'offer':offer}
             //console.log(id,name,price,image,details);
             const put=fetch(`api`,{
                 method:'PUT',
@@ -111,6 +126,8 @@ export const DataProvider = ({ children }) => {
               setFilteredData(filtered);
               setLoading(false);
         }
+        
+        
     return(
         <DataContext.Provider value={{dataset,
             loading,
@@ -140,6 +157,12 @@ export const DataProvider = ({ children }) => {
             handlesearch,
             filteredData,
             setFilteredData,
+            discountValues,
+            setDiscountValues,
+            discountType,
+            setDiscountType,
+            offer,
+            setOffer,
 
             }}>{children}
 </DataContext.Provider>

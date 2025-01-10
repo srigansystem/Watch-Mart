@@ -39,11 +39,6 @@ body {
     background-color: #fff;
     height: 50px;
     width: auto;
-}
-
-.filter-dropdown,
-.sort-dropdown,
-.category-dropdown {
     width: 200px;
     height: 50px;
 }
