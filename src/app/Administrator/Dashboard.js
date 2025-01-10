@@ -40,7 +40,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(simulateDataUpdate, 3000); // Auto-refresh every 3 seconds
+    const interval = setInterval(simulateDataUpdate, 3600000); // Auto-refresh every 60 mins
     return () => clearInterval(interval);
   }, [simulateDataUpdate]);
 
@@ -88,7 +88,7 @@ const Dashboard = () => {
               { month: "Mar", revenue: 15000 },
             ]}
           />
-          <PieChart data={{ paid: 30, unpaid: 15, shipped: 5 }} />
+          <PieChart data={{ paid: 10, unpaid: 15, shipped: 5 }} />
         </div>
 
         <div className="dashboard-cards">
@@ -126,7 +126,7 @@ const Dashboard = () => {
         </button>
 
         {/* Loading Spinner */}
-        {loading && <div className="loading-spinner">Updating data...</div>}
+        {loading && <div>Updating data...</div>}
 
         {/* Modal for Data Details */}
         <Modal show={showModal} onClose={() => setShowModal(false)} title={modalData.title} content={modalData.content} />
