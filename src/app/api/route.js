@@ -79,7 +79,7 @@ export var datasheet=[
     "price": 100000,
     "image": "https://watchingelegance.com/wp-content/uploads/2019/10/Rolex-Submariner-Date-40mm-116618LN.png",
     "stock": "11",
-    "offer":20,
+    "offer":"20% off",
     "currentprice":50000,
   },
 ]
