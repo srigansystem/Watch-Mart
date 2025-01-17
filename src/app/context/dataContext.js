@@ -37,7 +37,7 @@ export const DataProvider = ({ children }) => {
         
             setTimeout(() => {
                 setLoading(false);
-            }, 2000);
+            }, 100);
             //console.log(dataset.data);
             } catch (err) {
                 setError(err.message);
@@ -163,7 +163,7 @@ export const DataProvider = ({ children }) => {
             setDiscountType,
             offer,
             setOffer,
-
+            filereader
             }}>{children}
 </DataContext.Provider>
     );

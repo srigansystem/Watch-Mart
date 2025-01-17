@@ -53,7 +53,7 @@ const ProductList = () => {
 
   const deleteProduct = async () => {
     const updatedDataset = dataset.filter((product) => product.id !== productToDelete.id);
-    console.log("ieryrgcbkeudcgryk3irycg",updatedDataset);
+    console.log("delete",updatedDataset);
     
     setDataSet(updatedDataset);
     closeDeleteModal();
@@ -91,7 +91,8 @@ const ProductList = () => {
   };
 
 
-  const applyBulkDiscount = () => {
+  const applyBulkDiscount = async () => {
+    setLoading(true);
     if (bulkDiscountValue) {
       const parsedDiscount = parseFloat(bulkDiscountValue);
       
@@ -102,9 +103,10 @@ const ProductList = () => {
           if(product.category=="Analog"){
             product["offer"]=displayDiscount(),product["currentprice"]=applyDiscount(product)
         }});
-        extractinginputfile(dataset,false)
+        await extractinginputfile(dataset,false)
          
       }
+      setLoading(false)
   };
 
   const filteredProducts = dataset
@@ -116,7 +118,9 @@ const ProductList = () => {
     })
     .sort((a, b) => {
       if (sortBy === "name") return a.name.localeCompare(b.name);
-      if (sortBy === "price") return a.price - b.price;
+      
+      
+      if (sortBy === "price") return a.currentprice - b.currentprice;
       if (sortBy === "stock") return b.stock - a.stock;
       return 0;
     });
@@ -214,7 +218,7 @@ const ProductList = () => {
             <div className="product-details">
               <h3 className="product-name">{product.name}</h3>
               <p className="product-price">
-                {product.currentprice > 0 ? (
+                {product.price-product.currentprice != 0 ? (
                   <>
                     <span className="product-price discounted">
                       ₹. {product.price}

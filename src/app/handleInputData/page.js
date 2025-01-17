@@ -133,7 +133,7 @@ const HandlingFiles = () => {
           
         }}  >
         <AddInputData/>
-
+        
       </div>
     </div>)}
   </>
