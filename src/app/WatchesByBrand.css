@@ -47,11 +47,11 @@ body {
   }
 
   /* Filter & Sorting */
-  .filters-container, .brand-filter-container {
+  .filters-container, .brand-filter-container, .category-filter-container {
     margin-bottom: 20px;
   }
   
-  .brand-filter-container {
+  .brand-filter-container,  .category-filter-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;

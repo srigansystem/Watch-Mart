@@ -1,14 +1,13 @@
-import react from "react";
-import { useState, useEffect } from "react";
-import './Categories.css'; // Import the CSS file
+import React from "react";
+import "./Categories.css"; // Import the CSS file
 
-const Categories = () => {
+const Categories = ({ onCategorySelect }) => {
   const categories = [
-    'Wedding Collection',
-    'Smart Watches',
-    'Sports Watches',
-    'Kids Collection',
-    'More...',
+    "Wedding Collection",
+    "Smart Watches",
+    "Sports Watches",
+    "Kids Collection",
+    "More...",
   ];
 
   return (
@@ -16,7 +15,11 @@ const Categories = () => {
       <h1 className="categories-title">Watch Categories</h1>
       <ul className="categories-list">
         {categories.map((category, index) => (
-          <li key={index} className="category-item">
+          <li
+            key={index}
+            className="category-item"
+            onClick={() => onCategorySelect(category)} // Trigger callback when a category is clicked
+          >
             {category}
           </li>
         ))}

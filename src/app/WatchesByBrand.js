@@ -1,8 +1,11 @@
+// WatchesByBrand.js
 import React, { useState } from "react";
+import Categories from "./Categories"; // Import Categories component
 import "./WatchesByBrand.css";
 
 const WatchesByBrand = () => {
   const [selectedBrand, setSelectedBrand] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [filters, setFilters] = useState({
     minPrice: 0,
     maxPrice: 15000,
@@ -19,6 +22,13 @@ const WatchesByBrand = () => {
   const watchesPerPage = 8;
   const [showDetails, setShowDetails] = useState(null);
 
+  const categories = [
+    "Wedding Collection",
+    "Smart Watches",
+    "Sports Watches",
+    "Kids Collection",
+    "More...",
+  ];
   const brands = ["All", "Rolex", "Omega", "TAG Heuer", "Casio"];
   const materials = ["Steel", "Gold", "Leather", "Rubber"];
   const caseShapes = ["Round", "Square", "Oval"];
@@ -32,6 +42,7 @@ const WatchesByBrand = () => {
 
   const filteredWatches = watches
     .filter((watch) => {
+      const inCategories = selectedCategory === "All" || watch.category === selectedCategory;
       const inBrand = selectedBrand === "All" || watch.brand === selectedBrand;
       const inPriceRange = watch.price >= filters.minPrice && watch.price <= filters.maxPrice;
       const inCaseMaterial = filters.caseMaterial.length === 0 || filters.caseMaterial.includes(watch.case);
@@ -40,6 +51,7 @@ const WatchesByBrand = () => {
       const inCaseShape = filters.caseShape.length === 0 || filters.caseShape.includes(watch.caseShape);
       const isWaterResistantDepth = watch.waterDepth >= filters.waterResistantDepth;
       return (
+        inCategories &&
         inBrand &&
         inPriceRange &&
         inCaseMaterial &&
@@ -86,6 +98,7 @@ const WatchesByBrand = () => {
       waterResistantDepth: 0,
     });
     setSelectedBrand("All");
+    setSelectedCategory("All");
   };
 
   const openDetails = (id) => {
@@ -103,9 +116,16 @@ const WatchesByBrand = () => {
     }
   };
 
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    setCurrentPage(1); // Reset to the first page when a category is selected
+  };
+
   return (
     <div className="watches-container" onScroll={handleScroll}>
       <h1 className="watches-title">Explore Watches by Brand</h1>
+
+      <Categories onCategoryClick={handleCategoryClick} /> {/* Pass the handler as a prop */}
 
       <div className="main-content">
         {/* Filters and Sorting */}
@@ -122,6 +142,19 @@ const WatchesByBrand = () => {
                   onClick={() => setSelectedBrand(brand)}
                 >
                   {brand}
+                </button>
+              ))}
+            </div>
+
+            <div className="category-filter">
+              <h3>Category</h3>
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  className={`filter-btn ${selectedCategory === category ? "active" : ""}`}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
                 </button>
               ))}
             </div>
