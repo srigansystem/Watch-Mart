@@ -1,7 +1,10 @@
 // WatchesByBrand.js
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Categories from "./Categories"; // Import Categories component
 import "./WatchesByBrand.css";
+
+import DataContext from './context/dataContext'
+import "./page.css"
 
 const WatchesByBrand = () => {
   const [selectedBrand, setSelectedBrand] = useState("All");
@@ -21,7 +24,7 @@ const WatchesByBrand = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const watchesPerPage = 8;
   const [showDetails, setShowDetails] = useState(null);
-
+  const {dataset,setAddtocard,addtocard}=useContext(DataContext)
   const categories = [
     "Wedding Collection",
     "Smart Watches",
@@ -34,10 +37,10 @@ const WatchesByBrand = () => {
   const caseShapes = ["Round", "Square", "Oval"];
   const strapColors = ["Black", "Brown", "Blue", "Red"];
   const watches = [
-    { id: 1, brand: "Rolex", name: "Daytona", price: 12000, rating: 5, img: "rolex.jpg", case: "Gold", strap: "Leather", strapColor: "Black", caseShape: "Round", waterResistant: true, waterDepth: 100 },
-    { id: 2, brand: "Omega", name: "Seamaster", price: 8000, rating: 4, img: "omega.jpg", case: "Steel", strap: "Rubber", strapColor: "Blue", caseShape: "Round", waterResistant: true, waterDepth: 200 },
-    { id: 3, brand: "TAG Heuer", name: "Carrera", price: 4500, rating: 4.5, img: "tagheuer.jpg", case: "Steel", strap: "Leather", strapColor: "Brown", caseShape: "Round", waterResistant: false, waterDepth: 0 },
-    { id: 4, brand: "Casio", name: "G-Shock", price: 200, rating: 4, img: "casio.jpg", case: "Plastic", strap: "Rubber", strapColor: "Black", caseShape: "Square", waterResistant: true, waterDepth: 500 },
+    { id: 1, brand: "Rolex", name: "Daytona", price: 12000, rating: 5, img: "rolex.jpg", case: "Gold", strap: "Leather", strapColor: "Black", caseShape: "Round", waterResistant: true, waterDepth: 100, category: "Wedding Collection" },
+    { id: 2, brand: "Omega", name: "Seamaster", price: 8000, rating: 4, img: "omega.jpg", case: "Steel", strap: "Rubber", strapColor: "Blue", caseShape: "Round", waterResistant: true, waterDepth: 200, category: "Smart Watches" },
+    { id: 3, brand: "TAG Heuer", name: "Carrera", price: 4500, rating: 4.5, img: "tagheuer.jpg", case: "Steel", strap: "Leather", strapColor: "Brown", caseShape: "Round", waterResistant: false, waterDepth: 0, category: "Sports Watches" },
+    { id: 4, brand: "Casio", name: "G-Shock", price: 200, rating: 4, img: "casio.jpg", case: "Plastic", strap: "Rubber", strapColor: "Black", caseShape: "Square", waterResistant: true, waterDepth: 500, category: "Kids Collection" },
   ];
 
   const filteredWatches = watches
@@ -241,33 +244,39 @@ const WatchesByBrand = () => {
         </div>
 
         {/* Watches Grid */}
-        <div className="watches-grid">
-          {paginatedWatches.map((watch) => (
-            <div key={watch.id} className="watch-card">
-              <img src={watch.img} alt={watch.name} className="watch-image" />
-              <h3>{watch.name}</h3>
-              <p>{watch.brand}</p>
-              <p>₹{watch.price.toLocaleString()}</p>
-              <div className="actions">
-                <button onClick={() => openDetails(watch.id)} className="view-details">View Details</button>
-                <span
-                  className={`favorite-icon ${favorites.includes(watch.id) ? "favorited" : ""}`}
-                  onClick={() => toggleFavorite(watch.id)}
-                >
-                  ❤️
-                </span>
-                <button
-                  onClick={() => toggleCompare(watch.id)}
-                  className={`compare-btn ${compare.includes(watch.id) ? "compared" : ""}`}
-                >
-                  {compare.includes(watch.id) ? "Remove from Compare" : "Add to Compare"}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+<div className="watches-grid">
+  {paginatedWatches.map((watch) => (
+    <div key={watch.id} className="watch-card">
+      <img src={watch.img} alt={watch.name} className="watch-image" />
+      <h3>{watch.name}</h3>
+      <p>{watch.brand}</p>
+      <p>{watch.category}</p>
+      <p>₹{watch.price.toLocaleString()}</p>
+      <div className="button-group">
+        <button onClick={() => openDetails(watch.id)} className="cartbutton">View Details</button>
+        <span
+          className={`favorite-icon ${favorites.includes(watch.id) ? "favorited" : ""}`}
+          onClick={() => toggleFavorite(watch.id)}
+        >
+          ❤️
+        </span>
+        <button
+          onClick={() => toggleCompare(watch.id)}
+          className={`compare-btn ${compare.includes(watch.id) ? "compared" : ""}`}
+        >
+          {compare.includes(watch.id) ? "Remove from Compare" : "Add to Compare"}
+        </button>
+        <button
+          onClick={() => setAddtocard(addtocard + 1)}
+          className="addtocardbtn"
+        >
+          Add to Cart
+        </button>
       </div>
-
+    </div>
+  ))}
+</div>
+</div>
       {/* Compare Watches */}
       {compare.length > 0 && (
         <div className="compare-section">
@@ -304,6 +313,7 @@ const WatchesByBrand = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2>{showDetails.name}</h2>
             <p>{showDetails.brand}</p>
+            <p>{showDetails.category}</p>
             <p>Price: ₹{showDetails.price}</p>
             <p>Case: {showDetails.case}</p>
             <p>Strap: {showDetails.strap}</p>
