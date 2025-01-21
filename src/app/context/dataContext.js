@@ -19,6 +19,7 @@ export const DataProvider = ({ children }) => {
     const [stock,setStock]=useState('');
     const [offer,setOffer]=useState('');
     const [addtocard,setAddtocard]=useState(0);
+    const [addtocart,setAddtocart]=useState(0);
     const [filteredData,setFilteredData]=useState([]);
     const [discountValues, setDiscountValues] = useState({});
     const [discountType, setDiscountType] = useState("percentage");
@@ -163,7 +164,8 @@ export const DataProvider = ({ children }) => {
             setDiscountType,
             offer,
             setOffer,
-            filereader
+            filereader,
+            addtocart, setAddtocart
             }}>{children}
 </DataContext.Provider>
     );

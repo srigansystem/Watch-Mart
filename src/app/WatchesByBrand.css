@@ -48,7 +48,7 @@ body {
    /* View Details */
    .addtocardbtn {
     padding: 10px 18px;
-    background-color: #3498db;
+    background-color: #005b0e;
     color: #fff;
     font-weight: 300;
     border: none;
@@ -228,7 +228,7 @@ body {
     padding: 10px 18px;
     background-color: #3498db;
     color: #fff;
-    font-weight: 300;
+    font-weight: 100;
     border: none;
     cursor: pointer;
     border-radius: 8px;
@@ -483,9 +483,61 @@ body {
 
 /* Add to Cart Button */
 .addtocardbtn {
-    background-color: #3498db;
+    background-color: #2980b9;
 }
 
 .addtocardbtn:hover {
-  background-color: #2980b9;
+  background-color: #087700;
+}
+
+/* Remove button */
+.removebtn {
+  background-color: #f44336; /* Red */
+  color: white;
+  font-weight: 300;
+  margin-left: 10px; /* Space between buttons */
+  padding: 10px 18px;
+  color: #fff;
+  font-weight: 300;   
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.removebtn:hover {
+  background-color: #e53935;
+  transform: scale(1.05);
+}
+
+/* Decrement button (-) */
+.decrementbtn {
+  background-color: #ff9800; /* Orange */
+  color: white;
+  margin-left: 10px; /* Space between buttons */
+  font-weight: 300;
+  padding: 10px 18px;
+  font-weight: 300;   
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  
+}
+
+.decrementbtn:hover {
+  background-color: #fb8c00;
+  transform: scale(1.05);
+}
+
+/* Container styling for buttons */
+button + button {
+  margin-left: 10px; /* Add space between buttons */
+}
+
+/* Cart Quantity display */
+p {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
 }

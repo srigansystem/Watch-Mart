@@ -124,6 +124,22 @@ const WatchesByBrand = () => {
     setCurrentPage(1); // Reset to the first page when a category is selected
   };
 
+  const { addtocart, setAddtocart } = useContext(DataContext);
+
+  const handleAddToCart = () => {
+    setAddtocart(addtocart + 1); // Add one more to cart
+  };
+
+  const handleRemoveFromCart = () => {
+    setAddtocart(0); // Remove all from cart
+  };
+
+  const handleDecrement = () => {
+    if (addtocart > 1) {
+      setAddtocart(addtocart - 1); // Decrement by 1
+    }
+  };
+
   return (
     <div className="watches-container" onScroll={handleScroll}>
       <h1 className="watches-title">Explore Watches by Brand</h1>
@@ -266,14 +282,25 @@ const WatchesByBrand = () => {
         >
           {compare.includes(watch.id) ? "Remove from Compare" : "Add to Compare"}
         </button>
-        <button
-          onClick={() => setAddtocard(addtocard + 1)}
-          className="addtocardbtn"
-        >
-          Add to Cart
+        <button onClick={handleAddToCart} className="addtocardbtn">
+        +
+      </button>
+
+      {addtocart >= 1 && (
+        <button onClick={handleRemoveFromCart} className="removebtn">
+          Remove from Cart
         </button>
-      </div>
+      )}
+
+      {addtocart > 1 && (
+        <button onClick={handleDecrement} className="decrementbtn">
+          -
+        </button>
+      )}
+
+      <p>Cart Quantity: {addtocart}</p>
     </div>
+      </div>
   ))}
 </div>
 </div>
