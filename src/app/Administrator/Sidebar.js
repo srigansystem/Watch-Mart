@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
-
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -27,9 +26,13 @@ const Sidebar = () => {
           <span className="sidebar-icon">📊</span>
           {!isCollapsed && <span className="sidebar-text">My Sales</span>}
         </NavLink>
-        <NavLink to="/catalog" className="sidebar-link">
+        <NavLink to="/ProductList" className="sidebar-link">
           <span className="sidebar-icon">📦</span>
-          {!isCollapsed && <span className="sidebar-text">Catalog</span>}
+          {!isCollapsed && <span className="sidebar-text">Products</span>}
+        </NavLink>
+        <NavLink to="/payment" className="sidebar-link">
+          <span className="sidebar-icon">🛒</span>
+          {!isCollapsed && <span className="sidebar-text">Payment</span>}
         </NavLink>
         <NavLink to="/shipping-pickup" className="sidebar-link">
           <span className="sidebar-icon">🚚</span>
@@ -42,10 +45,6 @@ const Sidebar = () => {
         <NavLink to="/reports" className="sidebar-link">
           <span className="sidebar-icon">📄</span>
           {!isCollapsed && <span className="sidebar-text">Reports</span>}
-        </NavLink>
-        <NavLink to="/sales-channels" className="sidebar-link">
-          <span className="sidebar-icon">🛒</span>
-          {!isCollapsed && <span className="sidebar-text">Sales Channels</span>}
         </NavLink>
       </div>
       <div className="sidebar-footer">

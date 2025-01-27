@@ -7,11 +7,11 @@ import dynamic from "next/dynamic"; // Next.js dynamic import for client-side re
 const Sidebar = dynamic(() => import("./Sidebar"), { ssr: false });
 const Dashboard = dynamic(() => import("./Dashboard"), { ssr: false });
 const MySales = dynamic(() => import("./MySales"), { ssr: false });
-const Catalog = dynamic(() => import("./Catalog"), { ssr: false });
+const ProductList = dynamic(() => import("./ProductList"), { ssr: false });
 const ShippingPickup = dynamic(() => import("./ShippingPickup"), { ssr: false });
 const Settings = dynamic(() => import("./Settings"), { ssr: false });
 const Reports = dynamic(() => import("./Reports"), { ssr: false });
-const SalesChannels = dynamic(() => import("./SalesChannels"), { ssr: false });
+const Payment = dynamic(() => import("./Payment"), { ssr: false });
 
 const Page = () => {
   // Use state or effect hooks as needed
@@ -35,11 +35,11 @@ const Page = () => {
 <Routes>  {/* Define Routes to render different components based on the URL */}
             <Route path="/Administrator" element={<Dashboard />} />
             <Route path="/my-sales" element={<MySales />} />
-            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/ProductList" element={<ProductList />} />
             <Route path="/shipping-pickup" element={<ShippingPickup />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/reports" element={<Reports />} />
-            <Route path="/sales-channels" element={<SalesChannels />} />
+            <Route path="/payment" element={<Payment />} />
           </Routes>
         </div>
       </div>

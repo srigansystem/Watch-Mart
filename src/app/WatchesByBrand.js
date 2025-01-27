@@ -1,5 +1,6 @@
 // WatchesByBrand.js
-import React, { useState, useContext } from "react";
+"use client"
+import React, { useState, useContext, useEffect } from "react";
 import Categories from "./Categories"; // Import Categories component
 import "./WatchesByBrand.css";
 
@@ -8,10 +9,11 @@ import "./page.css"
 
 const WatchesByBrand = () => {
   const [selectedBrand, setSelectedBrand] = useState("All");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  // const [selectedCategory, setSelectedCategory] = useState("All");
+  const {selectedCategory,setSelectedCategory,setFilteredData,filteredData,isFilterOpen}=useContext(DataContext)
   const [filters, setFilters] = useState({
     minPrice: 0,
-    maxPrice: 15000,
+    maxPrice: 100000,
     caseMaterial: [],
     strapMaterial: [],
     strapColor: [],
@@ -25,43 +27,39 @@ const WatchesByBrand = () => {
   const watchesPerPage = 8;
   const [showDetails, setShowDetails] = useState(null);
   const {dataset,setAddtocard,addtocard}=useContext(DataContext)
-  const categories = [
-    "Wedding Collection",
-    "Smart Watches",
-    "Sports Watches",
-    "Kids Collection",
-    "More...",
-  ];
   const brands = ["All", "Rolex", "Omega", "TAG Heuer", "Casio"];
   const materials = ["Steel", "Gold", "Leather", "Rubber"];
   const caseShapes = ["Round", "Square", "Oval"];
   const strapColors = ["Black", "Brown", "Blue", "Red"];
-  const watches = [
-    { id: 1, brand: "Rolex", name: "Daytona", price: 12000, rating: 5, img: "rolex.jpg", case: "Gold", strap: "Leather", strapColor: "Black", caseShape: "Round", waterResistant: true, waterDepth: 100, category: "Wedding Collection" },
-    { id: 2, brand: "Omega", name: "Seamaster", price: 8000, rating: 4, img: "omega.jpg", case: "Steel", strap: "Rubber", strapColor: "Blue", caseShape: "Round", waterResistant: true, waterDepth: 200, category: "Smart Watches" },
-    { id: 3, brand: "TAG Heuer", name: "Carrera", price: 4500, rating: 4.5, img: "tagheuer.jpg", case: "Steel", strap: "Leather", strapColor: "Brown", caseShape: "Round", waterResistant: false, waterDepth: 0, category: "Sports Watches" },
-    { id: 4, brand: "Casio", name: "G-Shock", price: 200, rating: 4, img: "casio.jpg", case: "Plastic", strap: "Rubber", strapColor: "Black", caseShape: "Square", waterResistant: true, waterDepth: 500, category: "Kids Collection" },
-  ];
-
-  const filteredWatches = watches
+console.log("test",selectedBrand);
+const categories = [
+  "Wedding Collection",
+  "Smart Watches",
+  "Sports Watches",
+  "Kids Collection",
+  "More...",
+];
+useEffect(() => {
+  var filteredWatches = dataset
     .filter((watch) => {
       const inCategories = selectedCategory === "All" || watch.category === selectedCategory;
-      const inBrand = selectedBrand === "All" || watch.brand === selectedBrand;
+      const inBrand = selectedBrand === "All" || watch.brand == selectedBrand;
+      console.log("test2",inBrand);
       const inPriceRange = watch.price >= filters.minPrice && watch.price <= filters.maxPrice;
-      const inCaseMaterial = filters.caseMaterial.length === 0 || filters.caseMaterial.includes(watch.case);
-      const inStrapMaterial = filters.strapMaterial.length === 0 || filters.strapMaterial.includes(watch.strap);
-      const inStrapColor = filters.strapColor.length === 0 || filters.strapColor.includes(watch.strapColor);
-      const inCaseShape = filters.caseShape.length === 0 || filters.caseShape.includes(watch.caseShape);
-      const isWaterResistantDepth = watch.waterDepth >= filters.waterResistantDepth;
+      // const inCaseMaterial = filters.caseMaterial.length === 0 || filters.caseMaterial.includes(watch.case);
+      // const inStrapMaterial = filters.strapMaterial.length === 0 || filters.strapMaterial.includes(watch.strap);
+      // const inStrapColor = filters.strapColor.length === 0 || filters.strapColor.includes(watch.strapColor);
+      // const inCaseShape = filters.caseShape.length === 0 || filters.caseShape.includes(watch.caseShape);
+      // const isWaterResistantDepth = watch.waterDepth >= filters.waterResistantDepth;
       return (
         inCategories &&
         inBrand &&
-        inPriceRange &&
-        inCaseMaterial &&
-        inStrapMaterial &&
-        inStrapColor &&
-        inCaseShape &&
-        isWaterResistantDepth
+        inPriceRange 
+        // inCaseMaterial &&
+        // inStrapMaterial &&
+        // inStrapColor &&
+        // inCaseShape &&
+        // isWaterResistantDepth
       );
     })
     .sort((a, b) => {
@@ -70,12 +68,11 @@ const WatchesByBrand = () => {
       if (sortOption === "Rating: High to Low") return b.rating - a.rating;
       return 0;
     });
-
-  const paginatedWatches = filteredWatches.slice(
-    (currentPage - 1) * watchesPerPage,
-    currentPage * watchesPerPage
-  );
-
+    console.log("filter",filteredWatches);
+    
+  setFilteredData(filteredWatches)
+},[isFilterOpen])
+  
   const toggleFavorite = (id) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]));
   };
@@ -93,7 +90,7 @@ const WatchesByBrand = () => {
   const resetFilters = () => {
     setFilters({
       minPrice: 0,
-      maxPrice: 15000,
+      maxPrice: 100000,
       caseMaterial: [],
       strapMaterial: [],
       strapColor: [],
@@ -105,7 +102,7 @@ const WatchesByBrand = () => {
   };
 
   const openDetails = (id) => {
-    const watch = watches.find((watch) => watch.id === id);
+    const watch = dataset.find((watch) => watch.id === id);
     setShowDetails(watch);
   };
 
@@ -124,28 +121,25 @@ const WatchesByBrand = () => {
     setCurrentPage(1); // Reset to the first page when a category is selected
   };
 
-  const { addtocart, setAddtocart } = useContext(DataContext);
+  
 
   const handleAddToCart = () => {
-    setAddtocart(addtocart + 1); // Add one more to cart
+    setAddtocard(addtocard + 1); // Add one more to cart
   };
 
   const handleRemoveFromCart = () => {
-    setAddtocart(0); // Remove all from cart
+    setAddtocard(0); // Remove all from cart
   };
 
   const handleDecrement = () => {
-    if (addtocart > 1) {
-      setAddtocart(addtocart - 1); // Decrement by 1
+    if (addtocard > 1) {
+      setAddtocard(addtocard - 1); // Decrement by 1
     }
   };
 
   return (
     <div className="watches-container" onScroll={handleScroll}>
-      <h1 className="watches-title">Explore Watches by Brand</h1>
-
-      <Categories onCategoryClick={handleCategoryClick} /> {/* Pass the handler as a prop */}
-
+      
       <div className="main-content">
         {/* Filters and Sorting */}
         <div className="filter-sort-container">
@@ -153,7 +147,7 @@ const WatchesByBrand = () => {
           <div className="filters-container">
             <button className="reset-btn" onClick={resetFilters}>Reset Filters</button>
             <div className="brand-filter">
-              <h3>Brands</h3>
+              <p>Brands</p>
               {brands.map((brand) => (
                 <button
                   key={brand}
@@ -166,7 +160,7 @@ const WatchesByBrand = () => {
             </div>
 
             <div className="category-filter">
-              <h3>Category</h3>
+              <p>Category</p>
               {categories.map((category) => (
                 <button
                   key={category}
@@ -178,17 +172,17 @@ const WatchesByBrand = () => {
               ))}
             </div>
 
-            <h3>Filters</h3>
+            <p>Filters</p>
             <label className="price">Price Range: ₹{filters.minPrice} - ₹{filters.maxPrice}</label>
             <input
               type="range"
               min="0"
-              max="15000"
+              max="100000"
               step="100"
               value={filters.maxPrice}
               onChange={(e) => setFilters({ ...filters, maxPrice: +e.target.value })}
             />
-            <h4>Case Material</h4>
+            <p>Case Material</p>
             {materials.map((material) => (
               <button
                 key={material}
@@ -205,7 +199,7 @@ const WatchesByBrand = () => {
                 {material}
               </button>
             ))}
-            <h4>Strap Color</h4>
+            <p>Strap Color</p>
             {strapColors.map((color) => (
               <button
                 key={color}
@@ -222,7 +216,7 @@ const WatchesByBrand = () => {
                 {color}
               </button>
             ))}
-            <h4>Case Shape</h4>
+            <p>Case Shape</p>
             {caseShapes.map((shape) => (
               <button
                 key={shape}
@@ -239,7 +233,7 @@ const WatchesByBrand = () => {
                 {shape}
               </button>
             ))}
-            <h4>Water Resistance Depth (m)</h4>
+            <p>Water Resistance Depth (m)</p>
             <input
               type="number"
               value={filters.waterResistantDepth}
@@ -260,56 +254,14 @@ const WatchesByBrand = () => {
         </div>
 
         {/* Watches Grid */}
-<div className="watches-grid">
-  {paginatedWatches.map((watch) => (
-    <div key={watch.id} className="watch-card">
-      <img src={watch.img} alt={watch.name} className="watch-image" />
-      <h3>{watch.name}</h3>
-      <p>{watch.brand}</p>
-      <p>{watch.category}</p>
-      <p>₹{watch.price.toLocaleString()}</p>
-      <div className="button-group">
-        <button onClick={() => openDetails(watch.id)} className="cartbutton">View Details</button>
-        <span
-          className={`favorite-icon ${favorites.includes(watch.id) ? "favorited" : ""}`}
-          onClick={() => toggleFavorite(watch.id)}
-        >
-          ❤️
-        </span>
-        <button
-          onClick={() => toggleCompare(watch.id)}
-          className={`compare-btn ${compare.includes(watch.id) ? "compared" : ""}`}
-        >
-          {compare.includes(watch.id) ? "Remove from Compare" : "Add to Compare"}
-        </button>
-        <button onClick={handleAddToCart} className="addtocardbtn">
-        +
-      </button>
 
-      {addtocart >= 1 && (
-        <button onClick={handleRemoveFromCart} className="removebtn">
-          Remove from Cart
-        </button>
-      )}
-
-      {addtocart > 1 && (
-        <button onClick={handleDecrement} className="decrementbtn">
-          -
-        </button>
-      )}
-
-      <p>Cart Quantity: {addtocart}</p>
-    </div>
-      </div>
-  ))}
-</div>
 </div>
       {/* Compare Watches */}
       {compare.length > 0 && (
         <div className="compare-section">
           <h2>Compare Watches</h2>
           {compare.map((id) => {
-            const watch = watches.find((w) => w.id === id);
+            const watch = dataset.find((w) => w.id === id);
             return (
               <div key={watch.id} className="compare-card">
                 <img src={watch.img} alt={watch.name} />
@@ -321,18 +273,7 @@ const WatchesByBrand = () => {
         </div>
       )}
 
-      {/* Pagination */}
-      <div className="pagination">
-        {Array.from({ length: Math.ceil(filteredWatches.length / watchesPerPage) }).map((_, idx) => (
-          <button
-            key={idx}
-            className={`page-btn ${currentPage === idx + 1 ? "active" : ""}`}
-            onClick={() => setCurrentPage(idx + 1)}
-          >
-            {idx + 1}
-          </button>
-        ))}
-      </div>
+     
 
       {/* Watch Details Modal */}
       {showDetails && (

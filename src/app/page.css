@@ -2,10 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Oswald:wght@200..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alata&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap');
 
+#text{
+  display: contents;
+}
+
 #header{
-    
+  background-color: #8D0B41;
+    margin: -10px;
+    padding: -10px;
     color: #FFFFFB;
-    background-color: #5b5f97;
+    
     font-family: "Alata", serif;
     font-style: italic;
 }
@@ -13,7 +19,7 @@
     background-size: 100%;
     font-family: "Alata", serif;
     font-style: normal;
-    background-color: #dfd6d4;
+    background-color: #D6CFB4;
     padding: 20px;
     border-top-left-radius: 35px;
     border-top-right-radius: 35px;
@@ -142,7 +148,7 @@
   
   .bubble span:nth-child(1) {
     inset: 10px;
-    border-left: 15px solid #0fb4ff;
+    border-left: 15px solid #8D0B41;
     filter: blur(8px);
   }
   
@@ -166,7 +172,7 @@
   
   .bubble span:nth-child(5) {
     inset: 10px;
-    border-bottom: 10px solid #fff;
+    border-bottom: 10px solid #8D0B41;
     filter: blur(8px);
     transform: rotate(330deg);
   }

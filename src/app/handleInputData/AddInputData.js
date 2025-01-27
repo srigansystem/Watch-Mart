@@ -20,8 +20,6 @@ const AppInputData = () => {
     alert("File uploaded sucessfully")
   } 
 
-
-
   return (
     <div className='input'>
 <div className="card px-8 py-6 rounded-lg bg-gray-800 w-82">

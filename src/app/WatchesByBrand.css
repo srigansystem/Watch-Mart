@@ -1,25 +1,25 @@
 /* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #fafafa;
+    background-color: #D6CFB4;
     margin: 0;
     padding: 10px;
     color: #333;
   }
   
   .watches-container {
-    padding: 40px 20px;
+    padding: 0px 0px;
     width: auto;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #D6CFB4;
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    
   }
   
   /* Title */
   .watches-title {
     text-align: center;
-    font-size: 2.8em;
+    font-size: 1.1em;
     font-weight: 600;
     margin-bottom: 10px;
     color: #2c3e50;
@@ -33,7 +33,7 @@ body {
   /* View Details */
   .view-details {
     padding: 10px 18px;
-    background-color: #3498db;
+    background-color: #8D0B41;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -42,7 +42,7 @@ body {
   }
 
   .view-details:hover {
-    background-color: #2980b9;
+    background-color: #8D0B41;
   }
 
    /* View Details */
@@ -58,11 +58,12 @@ body {
   }
 
   .addtocardbtn:hover {
-    background-color: #2980b9;
+    background-color: #8D0B41;
   }
   /* Filter & Sorting */
   .filters-container, .brand-filter-container, .category-filter-container {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    font-size: small;
   }
   
   .brand-filter-container,  .category-filter-container {
@@ -70,14 +71,15 @@ body {
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 3px;
   }
   
   .filter-btn {
     background-color: #fff;
+  
     border: 2px solid #ddd;
-    padding: 12px 18px;
-    margin-right: 10px;
+    padding: 5px 8px;
+    margin-right: 0px;
     margin-bottom: 10px;
     font-size: 1em;
     cursor: pointer;
@@ -86,19 +88,20 @@ body {
   }
   
   .filter-btn:hover {
-    background-color: #2980b9;
+    color: white;
+    background-color: #8D0B41;
     transform: translateY(-2px);
   }
   
   .filter-btn.active {
-    background-color: #3498db;
+    background-color: #8D0B41;
     color: #fff;
-    border-color: #2980b9;
+    border-color: #8D0B41;
   }
   
   .reset-btn {
     padding: 12px 20px;
-    background-color: #e74c3c;
+    background-color:  #8D0B41;
     color: #fff;
     font-weight: 500;
     border: none;
@@ -109,15 +112,17 @@ body {
   }
   
   .reset-btn:hover {
-    background-color: #c0392b;
+    background-color: #8D0B41;
+    
   }
   
   .sorting {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 3px;
     margin-bottom: 20px;
     flex-wrap: wrap;
+    font-size: small;
   }
   
   .sorting label {
@@ -167,18 +172,23 @@ body {
   .watches-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
+    gap: 3px;
     margin-bottom: 40px;
   }
   
   .watch-card {
-    background-color: #fff;
+    background-color: #D6CFB4;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 365px;
+    width: auto;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .watch-image{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
   }
   
   .watch-card:hover {
@@ -186,16 +196,9 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   }
   
-  .watch-image {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  
   .watch-card h3 {
-    font-size: 1.6em;
-    font-weight: 600;
+    font-size: 1.2em;
+    font-weight: 500;
     margin-top: 20px;
     color: #333;
   }
@@ -210,18 +213,18 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
+    gap: 3px;
   }
   
   .favorite-icon {
     font-size: 1.8em;
-    color: #e74c3c;
+    color: #8D0B41;
     cursor: pointer;
     transition: color 0.3s ease;
   }
   
   .favorite-icon:hover {
-    color: #c0392b;
+    color: #8D0B41;
   }
   
   .compare-btn {
@@ -367,9 +370,9 @@ body {
     position: absolute;
     top: 15px;
     right: 15px;
-    background-color: #e74c3c;
+    background-color:  #8D0B41;
     color: #fff;
-    font-weight: 600;
+    font-weight: 300;
     border: none;
     padding: 10px 15px;
     cursor: pointer;
@@ -378,7 +381,7 @@ body {
   }
   
   .modal-content button:hover {
-    background-color: #c0392b;
+    background-color:  #8D0B41;
   }
   
   /* Responsive Styles */
@@ -408,8 +411,8 @@ body {
   /* Watches Grid */
 .watches-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-  gap: 20px; /* Space between cards */
+  
+  gap: 3px; /* Space between cards */
 }
 
 /* Watch Card */
@@ -418,7 +421,10 @@ body {
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  width: 280px;
+  height: auto;
   text-align: center;
+  overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -428,9 +434,11 @@ body {
 }
 
 /* Watch Image */
-.watch-image {
-  width: 100%;
-  height: auto;
+.watches-image {
+  width: 200px;
+  height: 200px;
+  align-items: center;
+  object-fit: cover;
   border-radius: 8px;
   margin-bottom: 15px;
 }
@@ -440,7 +448,7 @@ body {
   display: flex;
   flex-wrap: wrap; /* Wrap buttons on smaller screens */
   justify-content: center; /* Center buttons */
-  gap: 10px; /* Space between buttons */
+  gap: 3px; /* Space between buttons */
   margin-top: 15px;
 }
 

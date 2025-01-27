@@ -23,6 +23,8 @@ export const DataProvider = ({ children }) => {
     const [filteredData,setFilteredData]=useState([]);
     const [discountValues, setDiscountValues] = useState({});
     const [discountType, setDiscountType] = useState("percentage");
+    const [selectedCategory, setSelectedCategory] = useState("All");
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
     //getting data throw api
     useEffect(() => {
         async function fetchData() {
@@ -165,7 +167,11 @@ export const DataProvider = ({ children }) => {
             offer,
             setOffer,
             filereader,
-            addtocart, setAddtocart
+            addtocart, setAddtocart,
+            setSelectedCategory,
+            selectedCategory,
+            setIsFilterOpen,
+            isFilterOpen
             }}>{children}
 </DataContext.Provider>
     );

@@ -3,6 +3,9 @@
 export async function GET(req,res){
   try {
     const fileContents =await readDatafile();
+    // console.log(fileContents);
+    // console.log("----");
+    
     return new Response(JSON.stringify({ fileContents }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
@@ -42,38 +45,46 @@ export async function POST(req) {
         { status: 400 }
       );
     }
-
-    // Connect to the database and insert the data
-    const connection = await pool.getConnection();
-    try {
-      const query = `
-  INSERT INTO watchs (id, name, details, price, image, stock, category, currentprice) 
-  VALUES ${file.map(() => "(?, ?, ?, ?, ?, ?, ?, ?)").join(", ")}
-`;
-
-const values = file.flatMap((product) => [
-  product.id,
-  product.name,
-  product.details,
-  product.price,     
-  product.image,
-  product.stock,
-  product.category,
-  product.currentprice,
-]);
-//console.log(values);
-
-
-const [result] = await connection.execute(query, values);
-
-      // Return success response
+    else{
+      
+      datasheet=file
+      console.log(datasheet);
       return new Response(
-        JSON.stringify({ message: 'Data inserted successfully', id: result.insertId }),
+        JSON.stringify({ success: 'data uploaded in the database' }),
         { status: 200 }
       );
-    } finally {
-      connection.release(); // Release the connection back to the pool
     }
+    // Connect to the database and insert the data
+//     const connection = await pool.getConnection();
+//     try {
+//       const query = `
+//   INSERT INTO watchs (id, name, details, price, image, stock, category, currentprice) 
+//   VALUES ${file.map(() => "(?, ?, ?, ?, ?, ?, ?, ?)").join(", ")}
+// `;
+
+// const values = file.flatMap((product) => [
+//   product.id,
+//   product.name,
+//   product.details,
+//   product.price,     
+//   product.image,
+//   product.stock,
+//   product.category,
+//   product.currentprice,
+// ]);
+// //console.log(values);
+
+
+// const [result] = await connection.execute(query, values);
+
+//       // Return success response
+//       return new Response(
+//         JSON.stringify({ message: 'Data inserted successfully', id: result.insertId }),
+//         { status: 200 }
+//       );
+//     } finally {
+//       connection.release(); // Release the connection back to the pool
+//     }
   } catch (error) {
     console.error('Error interacting with the database:', error);
     return new Response(
@@ -149,7 +160,7 @@ export var datasheet=[
   },
   {
     id: 4,
-    name: 'Fossil Gen 5 Smartwatch',
+    name: 'Fossil Gen 5 Smartwatches',
     details: 'Smart Features, Bluetooth Enabled',
     price: 18995,
     image: 'https://cdna.lystit.com/photos/fossil/ffd82c48/fossil--Gen-5e-Smartwatch-Rose-Gold-tone-Stainless-Steel.jpeg',
