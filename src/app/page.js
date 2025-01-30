@@ -42,7 +42,7 @@ export default function Home() {
       justifyContent: "center",
       padding: "10px", // Adjusted padding for better alignment
       boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.2)", // Lighter shadow for modern look
-      zIndex: 1000, // Ensure it's always on top
+      zIndex: 999, // Ensure it's always on top
     }}
   >
     <ShoppingCart size={24} style={{ color: "black" }} />
