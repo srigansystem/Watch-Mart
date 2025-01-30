@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ProductWatches.css';
-
+import Image from "next/image";
 const ProductWatches = () => {
   const [watches, setWatches] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,7 +40,8 @@ const ProductWatches = () => {
       <div className="watches-grid">
         {watches.map((watch) => (
           <div key={watch.id} className="watch-card">
-            <img className="watch-image" src={watch.image} alt={watch.name} />
+            <Image className="watch-image" src={watch.image} alt={watch.name} width={100}
+                    height="100"/>
             <h3>{watch.name}</h3>
             <p>{watch.details}</p>
             <p>{watch.category}</p>

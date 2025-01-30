@@ -11,13 +11,14 @@ const ImageSlider=() =>{
         const [currentIndex, setCurrentIndex] = useState(0);
         const [isAutoPlaying, setIsAutoPlaying] = useState(true);
         const images = [
-                slider,
-                slider2,
-                slider3,
-                slider4,
-                slider5,
-                                                    ];
+          slider,
+          slider2,
+          slider3,
+          slider4,
+          slider5,
+                                              ];
         useEffect(() => {
+         
           let interval;
           if (isAutoPlaying) {
             interval = setInterval(() => {
@@ -51,8 +52,8 @@ const ImageSlider=() =>{
                     alt="{image}"
                     className="object-cover w-full h-full"
                     id="image"
-                    width="100%"
-                    height="100%"
+                    width={100}
+                    height={100}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
                     <div className="absolute bottom-0 w-full p-8 text-white">

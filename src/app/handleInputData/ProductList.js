@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import "./ProductList.css";
 import DataContext from "../context/dataContext";
 
-
+import Image from "next/image";
 
 const ProductList = () => {
   const {
@@ -210,10 +210,12 @@ const ProductList = () => {
       <div id="product-list">
         {paginatedProducts.map((product) => (
           <div className="product-card" key={product.id}>
-            <img
+            <Image
               src={product.image}
               alt={product.name}
               className="product-image"
+              width={100}
+                    height={100}
             />
             <div className="product-details">
               <h3 className="product-name">{product.name}</h3>
