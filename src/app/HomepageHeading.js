@@ -114,7 +114,7 @@ const HomepageHeading = () => {
                           <div className="px-4 py-2 text-xs text-gray-500 border-b border-gray-100">Administration</div>
                           <button className="w-full flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-50">
                             <Shield style={{ width: "20px", height: "20px" }} />
-                            <a href='/Administrator'>
+                            <a href='/administrator'>
                               <span>Administrator</span>
                             </a>
                           </button>
