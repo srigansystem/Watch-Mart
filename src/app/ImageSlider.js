@@ -10,15 +10,15 @@ import "./ImageSlider.css"
 const ImageSlider=() =>{
         const [currentIndex, setCurrentIndex] = useState(0);
         const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-        const images = [
-          slider,
-          slider2,
-          slider3,
-          slider4,
-          slider5,
-                                              ];
+        
         useEffect(() => {
-         
+          const images = [
+            slider,
+            slider2,
+            slider3,
+            slider4,
+            slider5,
+                                                ];
           let interval;
           if (isAutoPlaying) {
             interval = setInterval(() => {
