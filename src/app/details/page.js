@@ -1,7 +1,6 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
 import React from 'react'
-import Image from "next/image";
 export default function Details(){
 
     const searchParams = useSearchParams();
@@ -30,13 +29,11 @@ export default function Details(){
                 </svg>
             </button>
 
-            <Image
+            <img
             src={image}
             alt={name}
             className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
             style={{width:"100%",objectFit:"cover"}}
-            width={100}
-                    height={100}
             />
 
             <div className="relative border border-gray-100 bg-white p-6">

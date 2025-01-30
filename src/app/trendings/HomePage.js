@@ -4,7 +4,6 @@ import Link from "next/link";
 import "./HomePage.css";
 import { useContext } from "react";
 import DataContext from "../context/dataContext";
-import Image from "next/image";
 // import Image from "next/image"
 const HomePage = ({data}) => {
   const {addtocard,setAddtocard}=useContext(DataContext);
@@ -34,12 +33,10 @@ const HomePage = ({data}) => {
     
           <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
             <div className="relative pb-[100%]">
-              <Image
+              <img
               src={product.image}
                 alt="testing"
                 className="absolute top-0 left-0 w-full h-full object-contain"
-                width={100}
-                    height={100}
               />
                 </div>
                   <div className="mt-4">

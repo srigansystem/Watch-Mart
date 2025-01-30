@@ -3,7 +3,6 @@ import React, { useContext } from 'react'
 import DataContext from './context/dataContext'
 import "./page.css"
 import Link from 'next/link'
-import Image from "next/image";
 const MenuBook = () => {
   const {dataset,setAddtocard,addtocard,filteredData}=useContext(DataContext)
   return (
@@ -20,12 +19,10 @@ const MenuBook = () => {
     >
             <div className="bg-[#FFF8E6] p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
             <div className="relative pb-[100%]">
-              <Image
+              <img
               src={product.image}
                 alt={product.name}
                 className="absolute top-0 left-0 w-full h-full object-contain"
-                width={100}
-                    height={100}
               />
                 </div>
                   <div className="mt-4">

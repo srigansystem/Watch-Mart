@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./MyAccount.css";
-import Image from "next/image";
+
 const MyAccount = () => {
   const [userInfo, setUserInfo] = useState({
     name: "John Doe",
@@ -174,9 +174,7 @@ const MyAccount = () => {
           <input type="file" onChange={handleFileChange} />
           {profilePicture && (
             <div className="profile-picture-preview">
-              <Image src={profilePicture} alt="Profile" width={100}
-                    height={100}
-                    />
+              <img src={profilePicture} alt="Profile" />
             </div>
           )}
         </div>
@@ -226,8 +224,7 @@ const MyAccount = () => {
 
   {savedItems.map((item, index) => (
     <li key={index}>
-      <Image src={`image/${item.name}.jpg`} alt={item.name} width={100}
-                    height={100} />
+      <img src={`image/${item.name}.jpg`} alt={item.name} />
       {item.name} - {item.price}
       <button onClick={() => {
         const updatedItems = savedItems.filter((_, i) => i !== index);
