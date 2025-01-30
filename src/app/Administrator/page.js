@@ -33,7 +33,7 @@ const Page = () => {
         <div className="content">
         <h1 className="flex items-center justify-center bg-blue-500 px-[3px] py-[3px] text-white h-[75px] w-auto text-2xl rounded-[5px]">Eswari Times - Admin</h1>
 <Routes>  {/* Define Routes to render different components based on the URL */}
-            <Route path="/administrator" element={<Dashboard />} />
+            <Route path="/Administrator" element={<Dashboard />} />
             <Route path="/my-sales" element={<MySales />} />
             <Route path="/HandlingFiles" element={<HandlingFiles />} />
             <Route path="/shipping-pickup" element={<ShippingPickup />} />

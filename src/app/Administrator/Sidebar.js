@@ -18,7 +18,7 @@ const Sidebar = () => {
 </button>
       </div>
       <div className="sidebar-menu">
-        <NavLink to="/administrator" className="sidebar-link">
+        <NavLink to="/Administrator" className="sidebar-link">
           <span className="sidebar-icon">🏠</span>
           {!isCollapsed && <span className="sidebar-text">Dashboard</span>}
         </NavLink>
