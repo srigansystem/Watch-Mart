@@ -7,7 +7,7 @@ import dynamic from "next/dynamic"; // Next.js dynamic import for client-side re
 const Sidebar = dynamic(() => import("./Sidebar"), { ssr: false });
 const Dashboard = dynamic(() => import("./Dashboard"), { ssr: false });
 const MySales = dynamic(() => import("./MySales"), { ssr: false });
-const ProductList = dynamic(() => import("./ProductList"), { ssr: false });
+const HandlingFiles = dynamic(() => import("./HandlingFiles"), { ssr: false });
 const ShippingPickup = dynamic(() => import("./ShippingPickup"), { ssr: false });
 const Settings = dynamic(() => import("./Settings"), { ssr: false });
 const Reports = dynamic(() => import("./Reports"), { ssr: false });
@@ -35,7 +35,7 @@ const Page = () => {
 <Routes>  {/* Define Routes to render different components based on the URL */}
             <Route path="/Administrator" element={<Dashboard />} />
             <Route path="/my-sales" element={<MySales />} />
-            <Route path="/ProductList" element={<ProductList />} />
+            <Route path="/HandlingFiles" element={<HandlingFiles />} />
             <Route path="/shipping-pickup" element={<ShippingPickup />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/reports" element={<Reports />} />

@@ -48,7 +48,7 @@ export async function POST(req) {
     else{
       
       datasheet=file
-      console.log(datasheet);
+      //console.log(datasheet);
       return new Response(
         JSON.stringify({ success: 'data uploaded in the database' }),
         { status: 200 }

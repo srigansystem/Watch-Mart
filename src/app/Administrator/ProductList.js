@@ -8,7 +8,6 @@ import DataContext from "../context/dataContext";
 const ProductList = () => {
   const {
     extractinginputfile,
-
     setDiscountValues,
     dataset,
     setDataSet,
@@ -38,7 +37,7 @@ const ProductList = () => {
   
   const [bulkDiscountValue, setBulkDiscountValue] = useState(""); // Bulk discount input field value
 
-  const handleSearch = (e) => setSearchQuery(e.target.value);
+  const handleSearch = (e) => setSearchQuery(e.target.value.toLowerCase());
   const handleSort = (e) => setSortBy(e.target.value);
   const handleFilterStock = (e) => setFilterStock(e.target.value);
 
@@ -111,7 +110,7 @@ const ProductList = () => {
   };
 
   const filteredProducts = dataset
-    .filter((product) => product.name.includes(searchQuery))
+    .filter((product) => product.name.toLowerCase().includes(searchQuery))
     .filter((product) => {
       if (filterStock === "inStock") return product.stock > 0;
       if (filterStock === "OutOfStock") return product.stock == 0;

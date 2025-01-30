@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 import "./Sidebar.css";
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -26,10 +26,10 @@ const Sidebar = () => {
           <span className="sidebar-icon">📊</span>
           {!isCollapsed && <span className="sidebar-text">My Sales</span>}
         </NavLink>
-        <NavLink to="/ProductList" className="sidebar-link">
+        <Link to="/HandlingFiles" className="sidebar-link">
           <span className="sidebar-icon">📦</span>
           {!isCollapsed && <span className="sidebar-text">Products</span>}
-        </NavLink>
+        </Link>
         <NavLink to="/payment" className="sidebar-link">
           <span className="sidebar-icon">🛒</span>
           {!isCollapsed && <span className="sidebar-text">Payment</span>}
