@@ -12,7 +12,7 @@ const Sidebar = () => {
   return (
     <div className={`sidebar-container ${isCollapsed ? "collapsed" : ""}`}>
       <div className="sidebar-header">
-        <h2 className="sidebar-title">{!isCollapsed ? "Admin Panel" : "AP"}</h2>
+        <h3 className="sidebar-title">{!isCollapsed ? "Admin Panel" : "AP"}</h3>
         <button className={`toggle-btn ${isCollapsed ? "collapsed" : "expanded"}`} onClick={toggleSidebar}>
   {isCollapsed ?"◁◁" : "▶▶"}
 </button>

@@ -14,14 +14,14 @@
 }
 
 .admin-container.light-mode {
-  background-color: #f4f4f4;
+  background-color: wheat;
   color: #333;
 }
 
 /* Body and general layout */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
+  background-color: wheat;
   color: #333;
   margin: 0;
   padding: 0;

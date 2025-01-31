@@ -87,8 +87,7 @@ const Dashboard = () => {
     <div className={`admin-container ${darkMode ? "dark-mode" : "light-mode"}`}>
       <div className="admin-content">
         <h1 className="admin-title">Dashboard</h1>
-        <p>Greetings</p>
-
+        <p>Greetings - Stay on top of your goals and track everything in one place. Lets make today productive.</p>
         {/* Theme Toggle Button */}
         <button className="theme-toggle-button" onClick={toggleTheme}>
           Toggle to {darkMode ? "Light" : "Dark"} Mode
