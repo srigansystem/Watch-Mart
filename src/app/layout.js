@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Watch Mart",
-  description: "Best watch collections",
+  title: "Best watch collections",
+  description: "Discover the latest collection of luxury and everyday watches at Watch Mart. Shop top brands, enjoy exclusive offers, and elevate your style.",
   icons: {
     icon: "watch.svg",
   },
