@@ -37,7 +37,6 @@ const MenuBook = () => {
                       <span className="text-lg font-bold" style={{color:"black"}}>Rs.{product.currentprice}</span>
                       {product.price-product.currentprice!=0?(<><span className="text-sm text-gray-500 ml-2 line-through">{product.price}
                         </span></>):(<></>)}
-                    
                       <span className="text-sm text-green-600 ml-2">{product.offer}</span>
                     </div>
                     <button
