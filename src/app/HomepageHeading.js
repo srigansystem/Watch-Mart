@@ -134,12 +134,12 @@ const HomepageHeading = () => {
                           <span>Manage Account</span>
                         </a>
                       </button>
-                      <button className="w-full flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-50">
+                      {/* <button className="w-full flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-50">
                         <ShoppingBasket style={{ width: "20px", height: "20px" }} />
                         <a href='/handleInputData'>
                           <span>Store</span>
                         </a>
-                      </button>
+                      </button> */}
                       <button className="w-full flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-50">
                         <LogOut style={{ width: "20px", height: "20px" }} />
                         <span>Log out</span>
