@@ -8,7 +8,6 @@ import Loading from "./loading";
 import Footer from "./trendings/footer";
 import Categories from "./Categories";
 import ImageSlider from "./ImageSlider";
-import MyAccount from "./MyAccount";
 import WatchesByBrand from "./WatchesByBrand";
 import FilterSlide from "./FilterSlide.js";
 import { Search, ShoppingCart, Menu, X, Edit } from 'lucide-react';
