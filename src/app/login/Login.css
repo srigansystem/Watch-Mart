@@ -2,8 +2,8 @@ body {
     margin: 0;
     font-family: "Poppins", sans-serif;
     background: url("https://source.unsplash.com/1600x900/?luxury-watch") no-repeat center center fixed;
-    background-color: wheat;
-    background-size: cover;
+    background-color: #D6CFB4;
+   background-size: cover;
   }
   
   .login-page {
