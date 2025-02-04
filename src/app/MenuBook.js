@@ -15,8 +15,7 @@ const MenuBook = () => {
             href={{
               pathname: "/details",
               query: { "id":product.id,"name":product.name,"image":product.image,"price":product.price,"stock":product.stock,"details":product.details},
-          }}
-    >
+          }}>
             <div className="bg-[#FFF8E6] p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
             <div className="relative pb-[100%]">
               <img
@@ -37,7 +36,6 @@ const MenuBook = () => {
                       <span className="text-lg font-bold" style={{color:"black"}}>Rs.{product.currentprice}</span>
                       {product.price-product.currentprice!=0?(<><span className="text-sm text-gray-500 ml-2 line-through">{product.price}
                         </span></>):(<></>)}
-                    
                       <span className="text-sm text-green-600 ml-2">{product.offer}</span>
                     </div>
                     <button
