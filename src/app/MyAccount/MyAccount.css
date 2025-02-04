@@ -1,0 +1,317 @@
+/* MyAccount.css */
+
+/* Global Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: wheat;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.brand-title {
+  font-size: 28px;
+  color: #8D0B41;
+  text-align: center;
+}
+
+.tagline {
+  font-size: 18px;
+  color: #c40f5a;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Heading Styles */
+h3 {
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: large;
+  cursor: pointer;
+  position: relative; /* For hover effect */
+}
+
+/* Change color of h3 when expanded */
+.account-info.expanded h3,
+.profile-picture.expanded h3,
+.order-processing.expanded h3,
+.courier-tracking.expanded h3,
+.saved-items.expanded h3,
+.returns.expanded h3,
+.change-password.expanded h3,
+.preferences.expanded h3,
+.watch-collection.expanded h3,
+.watch-reviews.expanded h3,
+.wishlist.expanded h3,
+.purchase-history.expanded h3,
+.insurance-info.expanded h3 {
+  color: black; /* Expanded color */
+}
+
+/* Change color of h3 when collapsed */
+.account-info.collapsed h3,
+.profile-picture.collapsed h3,
+.order-processing.collapsed h3,
+.courier-tracking.collapsed h3,
+.saved-items.collapsed h3,
+.returns.collapsed h3,
+.change-password.collapsed h3,
+.preferences.collapsed h3,
+.watch-collection.collapsed h3,
+.watch-reviews.collapsed h3,
+.wishlist.collapsed h3,
+.purchase-history.collapsed h3,
+.insurance-info.collapsed h3 {
+  color: wheat; /* Collapsed color */
+}
+
+/* Hover effect */
+h3:hover::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #007bff;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+
+/* Container Styles */
+.account-dashboard-page {
+  padding: 20px;
+}
+
+.account-info,
+.profile-picture,
+.order-processing,
+.courier-tracking,
+.saved-items,
+.returns,
+.change-password,
+.preferences,
+.watch-collection,
+.watch-reviews,
+.wishlist,
+.purchase-history,
+.insurance-info {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.account-info.collapsed,
+.profile-picture.collapsed,
+.order-processing.collapsed,
+.courier-tracking.collapsed,
+.saved-items.collapsed,
+.returns.collapsed,
+.change-password.collapsed,
+.preferences.collapsed,
+.watch-collection.collapsed,
+.watch-reviews.collapsed,
+.wishlist.collapsed,
+.purchase-history.collapsed,
+.insurance-info.collapsed {
+  background-color: #8D0B41; /* Collapsed color */
+}
+
+.account-info.expanded,
+.profile-picture.expanded,
+.order-processing.expanded,
+.courier-tracking.expanded,
+.saved-items.expanded,
+.returns.expanded,
+.change-password.expanded,
+.preferences.expanded,
+.watch-collection.expanded,
+.watch-reviews.expanded,
+.wishlist.expanded,
+.purchase-history.expanded,
+.insurance-info.expanded {
+  background-color: whitesmoke; /* Expanded color */
+}
+
+/* Expanded Section */
+.expanded-section {
+  margin-top: 10px;
+}
+
+/* Account Information Fields */
+.account-field {
+  margin: 5px 0;
+}
+
+textarea {
+  width: 100%; /* Ensure it takes full width */
+  min-height: 100px; /* Set a minimum height for better usability */
+  resize: vertical; /* Allow vertical resizing only */
+  border: 1px solid #ccc; /* Keep the border style consistent */
+  border-radius: 8px; /* Match the border radius */
+  padding: 10px; /* Add padding for better text spacing */
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* Input and Select Styles */
+input,
+select {
+  font-family: 'Roboto', sans-serif;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+}
+
+input:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Profile Picture Section */
+.profile-picture-preview img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
+
+/* Button Styles */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Error Message */
+.error {
+  color: #e74c3c;
+  font-size: 14px;
+}
+
+/* Standard Features Section */
+.standard-features {
+  background-color: #9bcafa;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.standard-features .feature-item {
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  color: #0056b3;
+}
+
+.standard-features .expanded-section {
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Input File Styles */
+input[type="file"] {
+  font-size: 14px;
+}
+
+/* Specific Section Styles */
+.saved-items ul,
+.returns ul,
+.watch-collection ul,
+.watch-reviews ul,
+.wishlist ul,
+.purchase-history ul,
+.insurance-info ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.saved-items li,
+.returns li,
+.watch-collection li,
+.watch-reviews li,
+.wishlist li,
+.purchase-history li,
+.insurance-info li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.saved-items li:last-child,
+.returns li:last-child,
+.watch-collection li:last-child,
+.watch-reviews li:last-child,
+.wishlist li:last-child,
+.purchase-history li:last-child,
+.insurance-info li:last-child {
+  border-bottom: none;
+}
+
+/* Profile Picture Section */
+.profile-picture {
+  background-color: #fcb6b6;
+  color: #0056b3;
+  padding: 10px 15px;
+  margin-top: 15px;
+  border-radius: 8px;
+}
+
+.order-processing,
+.courier-tracking,
+.saved-items,
+.returns {
+  background-color: #9ce9fb;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  color: #0056b3;
+}
+
+/* Table Styles for Purchase History */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+/* Insurance Information Styles */
+.insurance-info {
+  background-color: #e0f7fa;
+  padding: 10px;
+  border-radius: 8px;
+}
