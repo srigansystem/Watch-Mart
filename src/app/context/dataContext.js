@@ -37,6 +37,8 @@ export const DataProvider = ({ children }) => {
                 console.log(data.fileContents);
                 setDataSet(data.fileContents);
                 setFilteredData(data.fileContents);
+                //console.log(filteredData);
+                
         
             setTimeout(() => {
                 setLoading(false);

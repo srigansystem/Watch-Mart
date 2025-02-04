@@ -35,10 +35,10 @@ const MenuBook = () => {
                     </div>
                     <div className="mt-2">
                       <span className="text-lg font-bold" style={{color:"black"}}>Rs.{product.price}</span>
-                      <span className="text-sm text-gray-500 ml-2 line-through">1000
-                      </span>
+                      {product.price-product.currentprice!=0?(<><span className="text-sm text-gray-500 ml-2 line-through">{product.price}
+                        </span></>):(<></>)}
                     
-                      <span className="text-sm text-green-600 ml-2">20% off</span>
+                      <span className="text-sm text-green-600 ml-2">{product.offer}</span>
                     </div>
                     <button
                     onClick={()=>setAddtocard(addtocard+1)}
