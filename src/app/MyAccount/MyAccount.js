@@ -35,8 +35,6 @@ const MyAccount = () => {
     language: "English",
   });
   const [profilePicture, setProfilePicture] = useState(null);
-
-  // Other states
   const [watchCollection, setWatchCollection] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [wishlist, setWishlist] = useState([]);
@@ -45,6 +43,7 @@ const MyAccount = () => {
   ]);
   const [insurancePolicies, setInsurancePolicies] = useState([]);
 
+  // Password validation and management functions
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setNewPassword(value);
@@ -58,42 +57,29 @@ const MyAccount = () => {
   };
 
   const validatePassword = (password) => {
-    if (password.length < 6) {
-      setPasswordError("Password must be at least 6 characters.");
-    } else {
-      setPasswordError("");
-    }
+    setPasswordError(password.length < 6 ? "Password must be at least 6 characters." : "");
   };
 
   const validatePasswordMatch = (confirmPassword) => {
-    if (confirmPassword !== newPassword) {
-      setPasswordError("Passwords do not match.");
-    } else {
-      setPasswordError("");
-    }
+    setPasswordError(confirmPassword !== newPassword ? "Passwords do not match." : "");
   };
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setEmailError("Please enter a valid email.");
-    } else {
-      setEmailError("");
-    }
+    setEmailError(!emailRegex.test(email) ? "Please enter a valid email." : "");
   };
 
   const validatePhone = (phone) => {
     const phoneRegex = /^[\d\+\-\.\(\)\/\s]*$/;
-    if (!phoneRegex.test(phone)) {
-      setPhoneError("Please enter a valid phone number.");
-    } else {
-      setPhoneError("");
-    }
+    setPhoneError(!phoneRegex.test(phone) ? "Please enter a valid phone number." : "");
   };
 
   const handleSavePassword = () => {
     if (!passwordError && newPassword === confirmPassword) {
       alert("Password updated successfully!");
+      // Reset fields after saving
+      setNewPassword("");
+      setConfirmPassword("");
     } else {
       alert("Please fix the errors before saving.");
     }
@@ -125,6 +111,7 @@ const MyAccount = () => {
       setReturns([...returns, newReturn]);
       setReturnReason("");
       setReturnPhoto(null);
+      alert("Return submitted successfully!");
     } else {
       alert("Please provide a return reason and upload a photo.");
     }
@@ -140,6 +127,31 @@ const MyAccount = () => {
   const handleRemoveReturn = (index) => {
     const updatedReturns = returns.filter((_, i) => i !== index);
     setReturns(updatedReturns);
+    alert("Return request removed.");
+  };
+
+  // Watch Collection Management
+  const handleAddWatch = (watch) => {
+    setWatchCollection([...watchCollection, watch]);
+    alert(`${watch.name} added to your collection!`);
+  };
+
+  const handleRemoveWatch = (index) => {
+    const updatedCollection = watchCollection.filter((_, i) => i !== index);
+    setWatchCollection(updatedCollection);
+    alert("Watch removed from collection.");
+  };
+
+  // Review Management
+  const handleSubmitReview = (review) => {
+    setReviews([...reviews, review]);
+    alert("Review submitted successfully!");
+  };
+
+  // Wishlist Management
+  const handleAddToWishlist = (watch) => {
+    setWishlist([...wishlist, watch]);
+    alert(`${watch.name} added to your wishlist!`);
   };
 
   return (
@@ -148,12 +160,8 @@ const MyAccount = () => {
       <p className="tagline">Manage your orders, saved items, and more</p>
 
       {/* User Info Section */}
-      <div
-        className={`account-info ${expandedSection === "accountInfo" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("accountInfo")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Account Information</h3>
+      <div className={`account-info ${expandedSection === "accountInfo" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("accountInfo")}>Account Information</h3>
         {expandedSection === "accountInfo" && (
           <div>
             <div className="account-field">
@@ -191,64 +199,46 @@ const MyAccount = () => {
                 onChange={(e) => setUserInfo({ ...userInfo, address: e.target.value })}
               ></textarea>
             </div>
-            <button onClick={() => alert('User info updated successfully!')}>
-              Save Changes
-            </button>
+            <button onClick={() => alert('User info updated successfully!')}>Save Changes</button>
           </div>
         )}
       </div>
 
       {/* Profile Picture Upload */}
-      <div
-        className={`profile-picture ${expandedSection === "profilePicture" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("profilePicture")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Profile Picture</h3>
+      <div className={`profile-picture ${expandedSection === "profilePicture" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("profilePicture")}>Profile Picture</h3>
         {expandedSection === "profilePicture" && (
           <div>
             <input type="file" onChange={handleFileChange} />
             {profilePicture && (
               <div className="profile-picture-preview">
                 <img src={profilePicture} alt="Profile" />
+                <button onClick={() => setProfilePicture(null)}>Remove Profile Picture</button>
               </div>
             )}
-            <button onClick={() => setProfilePicture(null)}>Remove Profile Picture</button>
           </div>
         )}
       </div>
 
       {/* Order Processing Section */}
-      <div
-        className={`order-processing ${expandedSection === "orderProcessing" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("orderProcessing")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Current Order Status</h3>
+      <div className={`order-processing ${expandedSection === "orderProcessing" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("orderProcessing")}>Current Order Status</h3>
         {expandedSection === "orderProcessing" && (
           <div>
-            <p>Status: {orderStatus}</p>
-            <button 
-              className="order-button" 
-              onClick={() => setExpandedSection("courierTracking")} // Navigate to Courier Tracking section
-            >
-              Track Order
-            </button>
-            <p>Estimated Delivery: Jan 15, 2025</p>
+            <p>Current Status: {orderStatus}</p>
             {orderStatus === "Processing" && (
-              <button onClick={() => setOrderStatus("Cancelled")}>Cancel Order</button>
+              <button onClick={() => {
+                setOrderStatus("Cancelled");
+                alert("Order cancelled successfully!");
+              }}>Cancel Order</button>
             )}
           </div>
         )}
       </div>
 
       {/* Courier Tracking Section */}
-      <div
-        className={`courier-tracking ${expandedSection === "courierTracking" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("courierTracking")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Courier Tracking</h3>
+      <div className={`courier-tracking ${expandedSection === "courierTracking" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("courierTracking")}>Courier Tracking</h3>
         {expandedSection === "courierTracking" && (
           <div>
             <p>Courier: {trackingInfo.courier}</p>
@@ -268,12 +258,8 @@ const MyAccount = () => {
       </div>
 
       {/* Saved Items Section */}
-      <div
-        className={`saved-items ${expandedSection === "savedItems" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("savedItems")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Saved Items</h3>
+      <div className={`saved-items ${expandedSection === "savedItems" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("savedItems")}>Saved Items</h3>
         {expandedSection === "savedItems" && (
           <div>
             <ul>
@@ -289,12 +275,8 @@ const MyAccount = () => {
       </div>
 
       {/* Returns Section */}
-      <div
-        className={`returns ${expandedSection === "returns" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("returns")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Returns</h3>
+      <div className={`returns ${expandedSection === "returns" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("returns")}>Returns</h3>
         {expandedSection === "returns" && (
           <div>
             <h4>Submit a Return</h4>
@@ -334,12 +316,8 @@ const MyAccount = () => {
       </div>
 
       {/* Change Password Section */}
-      <div
-        className={`change-password ${expandedSection === "changePassword" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("changePassword")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Change Password</h3>
+      <div className={`change-password ${expandedSection === "changePassword" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("changePassword")}>Change Password</h3>
         {expandedSection === "changePassword" && (
           <div>
             <input
@@ -361,12 +339,8 @@ const MyAccount = () => {
       </div>
 
       {/* Preferences Section */}
-      <div
-        className={`preferences ${expandedSection === "preferences" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("preferences")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Preferences</h3>
+      <div className={`preferences ${expandedSection === "preferences" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("preferences")}>Preferences</h3>
         {expandedSection === "preferences" && (
           <div>
             <label>Receive Notifications ?
@@ -381,9 +355,11 @@ const MyAccount = () => {
               onChange={(e) => setPreferences({ ...preferences, language: e.target.value })}
             >
               <option value="English">English</option>
-              <option value="Spanish">Kannada</option>
-              <option value="Spanish">Tamil</option>
-              <option value="French">Hindi</option>
+              <option value="Spanish">Spanish</option>
+              <option value="Kannada">Kannada</option>
+              <option value="Tamil">Tamil</option>
+              <option value="French">French</option>
+              <option value="Hindi">Hindi</option>
             </select>
             <button onClick={handleSavePreferences}>Save Preferences</button>
           </div>
@@ -391,23 +367,18 @@ const MyAccount = () => {
       </div>
 
       {/* Watch Collection Section */}
-      <div
-        className={`watch-collection ${expandedSection === "watchCollection" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("watchCollection")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>My Watch Collection</h3>
+      <div className={`watch-collection ${expandedSection === "watchCollection" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("watchCollection")}>My Watch Collection</h3>
         {expandedSection === "watchCollection" && (
           <div>
             <ul>
               {watchCollection.map((watch, index) => (
                 <li key={index}>
-                  {watch.name} - {watch.purchaseDate}
+                  {watch.name} 
                   <button onClick={() => handleRemoveWatch(index)}>Remove</button>
                 </li>
               ))}
             </ul>
-            {/* Add Watch Form Example */}
             <button onClick={() => handleAddWatch({ name: "New Watch", purchaseDate: new Date().toLocaleDateString() })}>
               Add Watch
             </button>
@@ -416,12 +387,8 @@ const MyAccount = () => {
       </div>
 
       {/* Reviews Section */}
-      <div
-        className={`watch-reviews ${expandedSection === "watchReviews" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("watchReviews")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Watch Reviews</h3>
+      <div className={`watch-reviews ${expandedSection === "watchReviews" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("watchReviews")}>Watch Reviews</h3>
         {expandedSection === "watchReviews" && (
           <div>
             <ul>
@@ -429,19 +396,14 @@ const MyAccount = () => {
                 <li key={index}>{review.text} - Rating: {review.rating}</li>
               ))}
             </ul>
-            {/* Example Review Submission */}
             <button onClick={() => handleSubmitReview({ text: "Great watch!", rating: 5 })}>Submit Review</button>
           </div>
         )}
       </div>
 
       {/* Wishlist Section */}
-      <div
-        className={`wishlist ${expandedSection === "wishlist" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("wishlist")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Wishlist</h3>
+      <div className={`wishlist ${expandedSection === "wishlist" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("wishlist")}>Wishlist</h3>
         {expandedSection === "wishlist" && (
           <div>
             <ul>
@@ -449,19 +411,14 @@ const MyAccount = () => {
                 <li key={index}>{watch.name}</li>
               ))}
             </ul>
-            {/* Example Add to Wishlist */}
             <button onClick={() => handleAddToWishlist({ name: "New Watch" })}>Add to Wishlist</button>
           </div>
         )}
       </div>
 
       {/* Purchase History Section */}
-      <div
-        className={`purchase-history ${expandedSection === "purchaseHistory" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("purchaseHistory")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Purchase History</h3>
+      <div className={`purchase-history ${expandedSection === "purchaseHistory" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("purchaseHistory")}>Purchase History</h3>
         {expandedSection === "purchaseHistory" && (
           <table>
             <thead>
@@ -487,21 +444,15 @@ const MyAccount = () => {
       </div>
 
       {/* Insurance Information Section */}
-      <div
-        className={`insurance-info ${expandedSection === "insuranceInfo" ? "expanded" : "collapsed"}`}
-        onMouseEnter={() => toggleSection("insuranceInfo")}
-        onMouseLeave={() => toggleSection(null)}
-      >
-        <h3>Delete Account ?</h3>
+      <div className={`insurance-info ${expandedSection === "insuranceInfo" ? "expanded" : "collapsed"}`}>
+        <h3 onClick={() => toggleSection("insuranceInfo")}>Delete Account ?</h3>
         {expandedSection === "insuranceInfo" && (
           <div>
-            {/* Insurance management logic goes here */}
             <ul>
               {insurancePolicies.map((policy, index) => (
                 <li key={index}>{policy.details}</li>
               ))}
             </ul>
-            {/* Example Add Insurance Policy */}
             <button onClick={() => setInsurancePolicies([...insurancePolicies, { details: "Accounts Deleted" }])}>Delete Account</button>
           </div>
         )}
