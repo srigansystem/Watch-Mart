@@ -20,10 +20,7 @@ export const metadata = {
   icons: {
     icon: "watch.svg",
   },
-
 };
-
-
 export default function RootLayout({ children }) {
   
   return (
