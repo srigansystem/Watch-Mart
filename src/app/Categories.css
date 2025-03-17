@@ -1,0 +1,47 @@
+/* Categories.css */
+.categories-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 75px;
+  }
+  
+  .categories-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .categories-list {
+    display: flex; /* Flexbox for horizontal layout */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Align vertically */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 50px; /* Space between items */
+    justify-content: space-evenly; /* Equal spacing between items */
+  }
+  
+  
+  .category-item {
+    margin: 10px 0;
+    padding: 10px;
+    width: auto;
+    background: #1f03f3;
+    color: #ffffff;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex: 1;
+  }
+  
+  .category-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
